@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MeinCraft — play.meincraft.xyz</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --grass: #5d9e2f; --dirt: #8b5e3c; --stone: #8d8d8d; --sky: #5bc8f5;
+    --night: #0d1b2a; --star: #fff9c4; --cream: #fdf6e3; --gold: #ffd700;
+    --accent: #ff6b35; --dark: #111827; --panel: rgba(13,27,42,0.82);
+    --border: rgba(255,255,255,0.08);
+    --pixel: 'Press Start 2P', monospace; --body: 'Nunito', sans-serif; --mono: 'VT323', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--night); color: var(--cream); font-family: var(--body); overflow-x: hidden; min-height: 100vh; }
+
+  /* STARFIELD */
+  #stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  .star { position: absolute; border-radius: 50%; background: white; animation: twinkle var(--d, 3s) infinite alternate; }
+  @keyframes twinkle { from { opacity: 0.2; } to { opacity: 1; } }
+
+  .ground-strip { position: fixed; bottom: 0; left: 0; right: 0; z-index: 1; pointer-events: none; }
+  .grass-row { height: 18px; background: var(--grass); image-rendering: pixelated; }
+  .dirt-row { height: 32px; background: var(--dirt); }
+
+  main { position: relative; z-index: 2; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 60px 20px 120px; }
+  .page-view { display: none; width: 100%; max-width: 800px; flex-direction: column; align-items: center; }
+  .page-view.active { display: flex; }
+
+  /* HOME PAGE */
+  .hero { text-align: center; margin-bottom: 56px; }
+  .logo-title { font-family: var(--pixel); font-size: clamp(26px, 6vw, 52px); color: var(--cream); text-shadow: 4px 4px 0 var(--grass); margin-bottom: 18px; }
+  .ip-card { background: var(--panel); border: 2px solid var(--grass); border-radius: 4px; padding: 28px 40px; text-align: center; margin-bottom: 52px; width: 100%; max-width: 520px; }
+  .ip-address { font-family: var(--pixel); font-size: 18px; color: var(--gold); margin-bottom: 25px; display: block; }
+  
+  .copy-btn { background: var(--grass); font-family: var(--pixel); color: white; border: none; padding: 16px 30px; font-size: 12px; cursor: pointer; transition: 0.1s; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); }
+  .copy-btn span { margin-right: 8px; color: rgba(255,255,255,0.5); }
+  .action-btn { background: var(--accent); font-family: var(--pixel); color: white; border: none; padding: 18px 36px; text-decoration: none; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); }
+
+  /* PLATFORM GRID */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; width: 100%; margin-top: 20px; }
+  .card { background: rgba(255,255,255,0.04); border: 2px solid var(--border); padding: 30px; border-radius: 4px; text-align: center; cursor: pointer; transition: 0.2s; }
+  .card:hover { transform: translateY(-5px); border-color: var(--pc); background: rgba(255,255,255,0.08); }
+  
+  .back-link { align-self: flex-start; font-family: var(--pixel); font-size: 10px; color: var(--grass); text-decoration: none; margin-bottom: 30px; cursor: pointer; }
+
+  /* TUTORIALS */
+  .tutorial-content { text-align: center; width: 100%; }
+  .btn-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
+  
+  .video-link-btn { background: #ff0000; font-family: var(--pixel); color: white; border: none; padding: 16px 24px; font-size: 10px; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.3); text-decoration: none; }
+  .text-guide-btn { background: var(--stone); font-family: var(--pixel); color: white; border: none; padding: 16px 24px; font-size: 10px; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.3); }
+
+  .text-guide-box { display: none; background: rgba(0,0,0,0.3); border: 2px solid var(--border); padding: 25px; margin-top: 20px; text-align: left; border-radius: 4px; line-height: 1.6; }
+  .text-guide-box.open { display: block; }
+  .text-guide-box ol { padding-left: 20px; }
+  .text-guide-box li { margin-bottom: 10px; }
+  .highlight-ip { color: var(--gold); font-family: var(--pixel); font-size: 12px; display: block; margin: 5px 0; }
+
+  .pc { --pc: #5bc8f5; } .switch { --pc: #e4000f; } .ps { --pc: #003087; } .xbox { --pc: #107c10; }
+</style>
+</head>
+<body>
+
+<div id="stars"></div>
+<div class="ground-strip"><div class="grass-row"></div><div class="dirt-row"></div></div>
+
+<main>
+  <section id="home-view" class="page-view active">
+    <div class="hero">
+      <h1 class="logo-title">MEINCRAFT</h1>
+      <p>The ultimate semi-vanilla experience.</p>
+    </div>
+    <div class="ip-card">
+      <span class="ip-address">play.meincraft.xyz</span>
+      <button class="copy-btn" id="copyBtn" onclick="copyIP()"><span>&#9632;</span> Copy IP</button>
+    </div>
+    <button class="action-btn" onclick="showView('platform-view')">How to Join</button>
+  </section>
+
+  <section id="platform-view" class="page-view">
+    <div class="back-link" onclick="showView('home-view')">← Back</div>
+    <div class="hero"><h1>Pick Your Platform</h1></div>
+    <div class="grid">
+      <div class="card pc" onclick="showView('pc-tutorial')"><h3>PC / Java</h3><p>Java Edition</p></div>
+      <div class="card switch" onclick="showView('switch-tutorial')"><h3>Switch</h3><p>Bedrock Edition</p></div>
+      <div class="card ps" onclick="showView('ps-tutorial')"><h3>PlayStation</h3><p>Bedrock Edition</p></div>
+      <div class="card xbox" onclick="showView('xbox-tutorial')"><h3>Xbox</h3><p>Bedrock Edition</p></div>
+    </div>
+  </section>
+
+  <section id="pc-tutorial" class="page-view">
+    <div class="back-link" onclick="showView('platform-view')">← Back</div>
+    <div class="tutorial-content">
+      <h1>PC Connection</h1>
+      <p>Java Edition instructions</p>
+      <div class="btn-group">
+        <a href="https://www.youtube.com/watch?v=XVT6gx8Bl6Y&t=46s" target="_blank" class="video-link-btn">VIDEO TUTORIAL</a>
+        <button class="text-guide-btn" onclick="toggleText('tg-pc')">TEXT INSTRUCTIONS</button>
+      </div>
+      <div id="tg-pc" class="text-guide-box">
+        <ol>
+          <li>Launch Minecraft: Java Edition.</li>
+          <li>Click <strong>Multiplayer</strong> > <strong>Add Server</strong>.</li>
+          <li>In the <strong>Server Address</strong> box, put the server IP: <span class="highlight-ip">play.meincraft.xyz</span></li>
+          <li>Click <strong>Done</strong> and double-click the server to join!</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="switch-tutorial" class="page-view">
+    <div class="back-link" onclick="showView('platform-view')">← Back</div>
+    <div class="tutorial-content">
+      <h1>Switch Connection</h1>
+      <p>Bedrock Edition instructions</p>
+      <div class="btn-group">
+        <a href="https://www.youtube.com/watch?v=zalT_oR1nPM" target="_blank" class="video-link-btn">VIDEO TUTORIAL</a>
+        <button class="text-guide-btn" onclick="toggleText('tg-sw')">TEXT INSTRUCTIONS</button>
+      </div>
+      <div id="tg-sw" class="text-guide-box">
+        <ol>
+          <li>System Settings > Internet > Internet Settings.</li>
+          <li>Select your Wi-Fi > Change Settings > DNS Settings > Manual.</li>
+          <li>Set Primary DNS to <code>104.238.130.180</code> and Secondary to <code>8.8.8.8</code>.</li>
+          <li>Open Minecraft > Servers tab > Join any featured server.</li>
+          <li>In the menu that appears, select <strong>Connect to a Server</strong>.</li>
+          <li>Under Server Address, put the server IP: <span class="highlight-ip">play.meincraft.xyz</span></li>
+          <li>Click <strong>Submit</strong> to play!</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="ps-tutorial" class="page-view">
+    <div class="back-link" onclick="showView('platform-view')">← Back</div>
+    <div class="tutorial-content">
+      <h1>PlayStation Connection</h1>
+      <p>Bedrock Edition instructions</p>
+      <div class="btn-group">
+        <a href="https://www.youtube.com/watch?v=YyMY6fqzUNs&t=5s" target="_blank" class="video-link-btn">VIDEO TUTORIAL</a>
+        <button class="text-guide-btn" onclick="toggleText('tg-ps')">TEXT INSTRUCTIONS</button>
+      </div>
+      <div id="tg-ps" class="text-guide-box">
+        <ol>
+          <li>Set up your Internet Connection > Custom > Manual DNS.</li>
+          <li>Primary DNS: <code>104.238.130.180</code> | Secondary DNS: <code>8.8.8.8</code>.</li>
+          <li>Launch Minecraft > Servers > Join any featured server.</li>
+          <li>Select <strong>Connect to a Server</strong> in the BedrockConnect menu.</li>
+          <li>Put the server IP in the address box: <span class="highlight-ip">play.meincraft.xyz</span></li>
+          <li>Select <strong>Add to list</strong> and click <strong>Submit</strong>.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="xbox-tutorial" class="page-view">
+    <div class="back-link" onclick="showView('platform-view')">← Back</div>
+    <div class="tutorial-content">
+      <h1>Xbox Connection</h1>
+      <p>Bedrock Edition instructions</p>
+      <div class="btn-group">
+        <a href="https://www.youtube.com/watch?v=0vIhBWaBDig&t=27s" target="_blank" class="video-link-btn">VIDEO TUTORIAL</a>
+        <button class="text-guide-btn" onclick="toggleText('tg-xb')">TEXT INSTRUCTIONS</button>
+      </div>
+      <div id="tg-xb" class="text-guide-box">
+        <ol>
+          <li>Settings > General > Network Settings > Advanced > DNS > Manual.</li>
+          <li>Primary DNS: <code>104.238.130.180</code> | Secondary DNS: <code>8.8.8.8</code>.</li>
+          <li>Launch Minecraft > Servers tab > Join any featured server.</li>
+          <li>In the pop-up menu, choose <strong>Connect to a Server</strong>.</li>
+          <li>Where it asks for address, put the server IP: <span class="highlight-ip">play.meincraft.xyz</span></li>
+          <li>Submit and enjoy!</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  function showView(id) {
+    document.querySelectorAll('.page-view').forEach(v => v.classList.remove('active'));
+    document.querySelectorAll('.text-guide-box').forEach(b => b.classList.remove('open'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0,0);
+  }
+
+  function toggleText(id) {
+    document.getElementById(id).classList.toggle('open');
+  }
+
+  function copyIP() {
+    const btn = document.getElementById('copyBtn');
+    navigator.clipboard.writeText('play.meincraft.xyz').then(() => {
+      btn.textContent = '✔ Copied!';
+      setTimeout(() => {
+        btn.innerHTML = '<span>&#9632;</span> Copy IP';
+      }, 2000);
+    });
+  }
+
+  const starContainer = document.getElementById('stars');
+  for(let i=0; i<100; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const sz = Math.random()*2 + 1;
+    s.style.cssText = `width:${sz}px; height:${sz}px; top:${Math.random()*100}%; left:${Math.random()*100}%; --d:${Math.random()*3+2}s;`;
+    starContainer.appendChild(s);
+  }
+</script>
+</body>
+</html>
