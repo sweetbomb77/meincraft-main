@@ -59,6 +59,8 @@
   .text-guide-btn { background: var(--stone); font-family: var(--pixel); color: white; border: none; padding: 16px 24px; font-size: 10px; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.3); }
   .text-guide-box { display: none; background: rgba(0,0,0,0.3); border: 2px solid var(--border); padding: 25px; margin-top: 20px; text-align: left; border-radius: 4px; }
   .text-guide-box.open { display: block; }
+  .text-guide-box ol { padding-left: 20px; color: var(--cream); line-height: 1.6; }
+  .text-guide-box li { margin-bottom: 10px; }
   .highlight-ip { color: var(--gold); font-family: var(--pixel); font-size: 12px; display: block; margin: 5px 0; }
 
   .pc { --pc: #5bc8f5; } .switch { --pc: #e4000f; } .ps { --pc: #003087; } .xbox { --pc: #107c10; }
@@ -174,17 +176,76 @@ This rule also extends to any banned player related content.
         <button class="text-guide-btn" onclick="toggleText('tg-pc')">TEXT INSTRUCTIONS</button>
       </div>
       <div id="tg-pc" class="text-guide-box">
-        <ol style="padding-left: 20px;">
+        <ol>
           <li>Launch Minecraft: Java Edition.</li>
           <li>Click Multiplayer > Add Server.</li>
-          <li>Enter Server Address: <span class="highlight-ip">play.meincraft.xyz</span></li>
+          <li>In the Server Address box, put the server IP: <span class="highlight-ip">play.meincraft.xyz</span></li>
           <li>Click Done and join!</li>
         </ol>
       </div>
     </div>
   </section>
 
-  </main>
+  <section id="switch-tutorial" class="page-view">
+    <div class="back-link" onclick="showView('platform-view')">← Back</div>
+    <div class="tutorial-content">
+      <h1>Switch Connection</h1>
+      <div class="btn-group">
+        <a href="https://www.youtube.com/watch?v=zalT_oR1nPM" target="_blank" class="video-link-btn">VIDEO TUTORIAL</a>
+        <button class="text-guide-btn" onclick="toggleText('tg-sw')">TEXT INSTRUCTIONS</button>
+      </div>
+      <div id="tg-sw" class="text-guide-box">
+        <ol>
+          <li>Settings > Internet > Internet Settings.</li>
+          <li>Choose Wi-Fi > Change Settings > DNS Settings > Manual.</li>
+          <li>Primary DNS: <code>104.238.130.180</code> | Secondary: <code>8.8.8.8</code>.</li>
+          <li>Launch Minecraft > Servers > Join any featured server.</li>
+          <li>Select 'Connect to a Server' and enter the IP: <span class="highlight-ip">play.meincraft.xyz</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="ps-tutorial" class="page-view">
+    <div class="back-link" onclick="showView('platform-view')">← Back</div>
+    <div class="tutorial-content">
+      <h1>PlayStation Connection</h1>
+      <div class="btn-group">
+        <a href="https://www.youtube.com/watch?v=YyMY6fqzUNs&t=5s" target="_blank" class="video-link-btn">VIDEO TUTORIAL</a>
+        <button class="text-guide-btn" onclick="toggleText('tg-ps')">TEXT INSTRUCTIONS</button>
+      </div>
+      <div id="tg-ps" class="text-guide-box">
+        <ol>
+          <li>Settings > Network > Set Up Internet Connection > Custom.</li>
+          <li>DNS Settings > Manual.</li>
+          <li>Primary DNS: <code>104.238.130.180</code> | Secondary: <code>8.8.8.8</code>.</li>
+          <li>Launch Minecraft > Servers > Join any featured server.</li>
+          <li>In the menu, click 'Connect to a Server' and enter the IP: <span class="highlight-ip">play.meincraft.xyz</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="xbox-tutorial" class="page-view">
+    <div class="back-link" onclick="showView('platform-view')">← Back</div>
+    <div class="tutorial-content">
+      <h1>Xbox Connection</h1>
+      <div class="btn-group">
+        <a href="https://www.youtube.com/watch?v=0vIhBWaBDig&t=27s" target="_blank" class="video-link-btn">VIDEO TUTORIAL</a>
+        <button class="text-guide-btn" onclick="toggleText('tg-xb')">TEXT INSTRUCTIONS</button>
+      </div>
+      <div id="tg-xb" class="text-guide-box">
+        <ol>
+          <li>Settings > Network > Advanced > DNS > Manual.</li>
+          <li>Primary DNS: <code>104.238.130.180</code> | Secondary: <code>8.8.8.8</code>.</li>
+          <li>Launch Minecraft > Servers > Join any featured server.</li>
+          <li>Choose 'Connect to a Server' and enter the server IP: <span class="highlight-ip">play.meincraft.xyz</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+</main>
 
 <script>
   function showView(id) {
