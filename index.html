@@ -27,7 +27,7 @@
   .dirt-row { height: 32px; background: var(--dirt); }
 
   main { position: relative; z-index: 2; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 60px 20px 120px; }
-  .page-view { display: none; width: 100%; max-width: 800px; flex-direction: column; align-items: center; }
+  .page-view { display: none; width: 100%; max-width: 900px; flex-direction: column; align-items: center; }
   .page-view.active { display: flex; }
 
   /* HOME PAGE */
@@ -39,30 +39,25 @@
   .copy-btn { background: var(--grass); font-family: var(--pixel); color: white; border: none; padding: 16px 30px; font-size: 12px; cursor: pointer; transition: 0.1s; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); }
   .copy-btn span { margin-right: 8px; color: rgba(255,255,255,0.5); }
   
-  .home-nav { display: flex; flex-direction: column; gap: 20px; width: 100%; max-width: 320px; }
-  .action-btn { background: var(--accent); font-family: var(--pixel); color: white; border: none; padding: 18px 36px; text-decoration: none; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); text-align: center; }
-  .rules-btn { background: var(--stone); font-family: var(--pixel); color: white; border: none; padding: 18px 36px; text-decoration: none; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); text-align: center; }
+  .home-nav { display: flex; flex-direction: column; gap: 20px; width: 100%; max-width: 400px; }
+  .action-btn { background: var(--accent); font-family: var(--pixel); color: white; border: none; padding: 22px; font-size: 14px; text-decoration: none; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); text-align: center; }
+  .rules-btn { background: var(--stone); font-family: var(--pixel); color: white; border: none; padding: 22px; font-size: 14px; text-decoration: none; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); text-align: center; }
+
+  /* RULES CONTENT */
+  .rules-text-wrapper { background: var(--panel); border: 2px solid var(--border); padding: 40px; border-radius: 4px; text-align: left; white-space: pre-line; font-family: var(--body); font-size: 16px; line-height: 1.8; color: var(--cream); }
+  .back-link { align-self: flex-start; font-family: var(--pixel); font-size: 10px; color: var(--grass); text-decoration: none; margin-bottom: 30px; cursor: pointer; }
 
   /* PLATFORM GRID */
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; width: 100%; margin-top: 20px; }
   .card { background: rgba(255,255,255,0.04); border: 2px solid var(--border); padding: 30px; border-radius: 4px; text-align: center; cursor: pointer; transition: 0.2s; }
   .card:hover { transform: translateY(-5px); border-color: var(--pc); background: rgba(255,255,255,0.08); }
-  .back-link { align-self: flex-start; font-family: var(--pixel); font-size: 10px; color: var(--grass); text-decoration: none; margin-bottom: 30px; cursor: pointer; }
-
-  /* RULES PAGE */
-  .rules-container { width: 100%; text-align: left; }
-  .rule-block { background: rgba(255,255,255,0.03); border-left: 4px solid var(--gold); padding: 20px; margin-bottom: 25px; border-radius: 0 4px 4px 0; }
-  .rule-block h2 { font-family: var(--pixel); font-size: 14px; color: var(--gold); margin-bottom: 12px; }
-  .rule-block p { font-size: 15px; line-height: 1.6; color: rgba(253,246,227,0.8); }
-  .rule-block ul { margin-top: 10px; padding-left: 20px; color: rgba(253,246,227,0.7); }
-  .rule-block li { margin-bottom: 5px; }
 
   /* TUTORIALS */
   .tutorial-content { text-align: center; width: 100%; }
   .btn-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
   .video-link-btn { background: #ff0000; font-family: var(--pixel); color: white; border: none; padding: 16px 24px; font-size: 10px; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.3); text-decoration: none; }
   .text-guide-btn { background: var(--stone); font-family: var(--pixel); color: white; border: none; padding: 16px 24px; font-size: 10px; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.3); }
-  .text-guide-box { display: none; background: rgba(0,0,0,0.3); border: 2px solid var(--border); padding: 25px; margin-top: 20px; text-align: left; border-radius: 4px; line-height: 1.6; }
+  .text-guide-box { display: none; background: rgba(0,0,0,0.3); border: 2px solid var(--border); padding: 25px; margin-top: 20px; text-align: left; border-radius: 4px; }
   .text-guide-box.open { display: block; }
   .highlight-ip { color: var(--gold); font-family: var(--pixel); font-size: 12px; display: block; margin: 5px 0; }
 
@@ -92,54 +87,70 @@
 
   <section id="rules-view" class="page-view">
     <div class="back-link" onclick="showView('home-view')">← Back</div>
-    <div class="hero"><h1 class="logo-title" style="font-size: 28px;">THE RULES</h1></div>
-    <div class="rules-container">
-      <div class="rule-block">
-        <h2>I. Modifications</h2>
-        <p>No external modifications that give an unfair advantage (e.g. x-ray, freecam, moving in inventory, or mouse tweaks). Allowed mods include Litematica, Xaero's Minimap, and Worldmap.</p>
-      </div>
-      <div class="rule-block">
-        <h2>II. Hacking & Exploits</h2>
-        <p>No hacking or exploiting, including any sort of hack client. We have an active anticheat. You must contact support immediately if you discover an exploit, glitch, or bug. Any gain, even accidental, must be reported.</p>
-      </div>
-      <div class="rule-block">
-        <h2>III. Griefing</h2>
-        <p>Griefing is allowed; however, it is the people's choice what to do and not up to rules or moderators.</p>
-      </div>
-      <div class="rule-block">
-        <h2>IV. Punishment Circumvention</h2>
-        <p>Users are not allowed to avoid or bypass punishments. Any circumvention with alt accounts may result in a ban on all accounts. Use of server-chat while muted/banned is prohibited.</p>
-      </div>
-      <div class="rule-block">
-        <h2>V. Complicity</h2>
-        <p>Players involved in breaking rules (assisting, participating, or benefiting) may be punished as if they committed the act themselves.</p>
-      </div>
-      <div class="rule-block">
-        <h2>VI. Server Disruption</h2>
-        <p>Intentionally lagging the server, intervening in staff operations, DOS/DDOS attacks, or spamming tickets is strictly prohibited. Mass spawning of entities (boats, minecarts, items) that causes lag will result in automatic despawning.</p>
-      </div>
-      <div class="rule-block">
-        <h2>VII. Personal Information (Doxxing)</h2>
-        <p>Sharing personal information of others (names, photos, videos, phone numbers, locations) is strictly prohibited. The threat to use personal information is also banned regardless of intent.</p>
-      </div>
-      <div class="rule-block">
-        <h2>VIII. Impersonation & Defamation</h2>
-        <p>Impersonating players or staff via usernames, skins, or nicknames is banned. Spreading false information (defamation), faking evidence, or making unfounded allegations (e.g. pedophilia) will result in severe punishment.</p>
-      </div>
-      <div class="rule-block">
-        <h2>IX. Compliance</h2>
-        <p>All named items, titles, nicknames, and Discord accounts must be compliant with Rule X and must be presented in English characters (no accents/symbols).</p>
-      </div>
-      <div class="rule-block">
-        <h2>X. Respect & Toxicity</h2>
-        <p>Spamming, harassment, bullying, and hate speech are not tolerated. This includes:</p>
-        <ul>
-          <li>Discriminatory language towards racial, social, or religious identities.</li>
-          <li>Encouraging self-harm or Nazism.</li>
-          <li>Sexual or explicit content.</li>
-          <li>Political roleplay/larping involving ongoing real-world conflicts (e.g. Ukraine, Russia, Palestine, Israel).</li>
-        </ul>
-      </div>
+    <div class="hero"><h1>The Ten Commandments</h1></div>
+    <div class="rules-text-wrapper">
+Rule 1: No external modifications that give a unfair advantage e.g x-ray, freecam, moving in inventory or mouse tweaks. Allowed mods include litematica, xaero's minimap and worldmap.
+
+Rule 2: No hacking or exploiting including any sort of hack client or single or hack (we have an anticheat)
+
+Rule 3: Greifing is allowed however its the people's choice what to do and not up to rules or moderators
+
+Rule 4: Users are not allowed to avoid or bypass punishments. Any circumvention with alt accounts may result in a ban on all accounts. Any use of the server-chat while muted or banned is also not permitted.
+
+Rule 5: Players who are involved in the breaking of rules may be punished depending on the rule broken, previous history and the severity of the issue. This includes assisting, participating or benefiting from others breaking the rules. It could be treated as if they committed the act.
+
+All users are expected to contact support immediately if they have discovered an exploit, glitch, or bug. Any gain, even accidental, must be reported immediately. Players who take advantage of any bugs, glitches, or exploit will be punished depending on severity.
+
+Rule 6: Any form of disrupting server activity (e.g. intentionally lagging the server, intervening in staff operations such as responding to tickets or player concerns, performing denial of service attacks [DOS] or distributed denial of service attacks [DDOS], making unnecessary tickets in our support discord, or spamming tickets) is not allowed and players will be punished depending on severity. Any severe form of server disruption (DDOS attacks) will be reported to the proper authorities.
+
+Mass spawning of entities (ex. Boats, minecarts, dropped items) is not allowed and will result in the automatic despawning of said entities.
+
+Rule 7: Sharing personal information of other players is not allowed (Doxxing). Examples of personal information are (but not limited to) full names, photos / videos of players' real-life identities, phone numbers, social network profiles, contact details and locations of players' home/school/work.
+
+The use of (or threat to use) players' personal information is strictly prohibited under all circumstances, for any purpose, regardless of intent or justification.
+
+Rule 8: Any form of impersonation is not allowed. This includes, but is not limited to, changing your username, nickname or town and nation names to closely resemble or imitate another player or entity. It may also apply to skins in some instances. Impersonation of staff in any form is not allowed.
+
+Players who intentionally impersonate others in a way that cause harm or disruption may be subject to harsher punishments such as permanent bans.
+
+Comments or discussions that harm a player's real-life identity or reputation, such as spreading false or misleading information (defamation) are not allowed.
+
+This includes, but is not limited to, making allegations of pedophilia in public chat. Any legitimate concerns should be reported through a ticket with supporting evidence. False or unfounded accusations will result in punishment.
+
+This rule also covers any attempt to mislead players, undermine trust, or damage the reputation of DMC or its staff. Prohibited behavior includes, but is not limited to:
+
+• Fabricating, altering, or falsifying evidence
+• Intentionally submitting false or misleading tickets
+• Faking statements or screenshots
+• Intentionally spreading false rumors about the server, its staff, or its community
+
+Rule 9: All named items and entities in-game, usernames, titles, nicknames, and discord accounts must be compliant with rule 10. This also includes plot names, town cultures, etc. Generally, they must be presented in English characters (no accents, symbols, etc.).
+
+Staff may rename or remove them, in addition to applying punishments.
+
+Rule 10: Spamming, which is the act of repeatedly and swiftly sending messages in chat, is not allowed. This includes messages with all caps, spam of text, phrases, duplicates of text, copypastas, emojis, videos, images, links, GIFs, and pings. Mass pinging is not allowed.
+
+It is expected that all players remain respectful. Examples of toxicity include, but are not limited to:
+
+• Harassment or bullying of other players or staff members, including but not limited to targeted insults, attempting to bypass blocks (/ignore), repeated provocation or unprovoked killings, and excessive town camping
+• Repeat demands to staff, intentionally testing server boundaries to provoke a reaction. Concerns about staff conduct must be submitted through a support ticket, not through public or in-game confrontation
+• Inciting violence or toxicity
+• Messages that involve considerable amounts of profanity
+
+Punishments may vary depending on severity and/or previous history of players. Unwanted behavior, which includes the actions of, but not limited to:
+
+• Bypassing chat filter
+• Discriminatory language or hate speech towards racial and social identities (nationality, ethnicity, race, gender, sexual orientation, religion, age, etc.)
+• Encouraging self-harm or violence towards players
+• Nazism
+• Sensitive or explicit topics that do not fit the server environment, such as sexual content
+• Any inappropriate interactions towards other players
+
+Builds, signs, flags, banners, named items or entities, books, usernames, nicknames or skins may also fall under this rule.
+
+To maintain a respectful environment, we ask that roleplay/larping involving Israel, Palestine, Gaza, Turkey, Iran, Ukraine, and Russia be limited due to the ongoing real-world conflicts and sensitive geopolitical circumstances surrounding these regions.
+
+This rule also extends to any banned player related content.
     </div>
   </section>
 
@@ -163,7 +174,7 @@
         <button class="text-guide-btn" onclick="toggleText('tg-pc')">TEXT INSTRUCTIONS</button>
       </div>
       <div id="tg-pc" class="text-guide-box">
-        <ol style="margin-left: 20px;">
+        <ol style="padding-left: 20px;">
           <li>Launch Minecraft: Java Edition.</li>
           <li>Click Multiplayer > Add Server.</li>
           <li>Enter Server Address: <span class="highlight-ip">play.meincraft.xyz</span></li>
@@ -197,7 +208,7 @@
   }
 
   const starContainer = document.getElementById('stars');
-  for(let i=0; i<100; i++) {
+  for(let i=0; i<120; i++) {
     const s = document.createElement('div');
     s.className = 'star';
     const sz = Math.random()*2 + 1;
