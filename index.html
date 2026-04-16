@@ -38,26 +38,32 @@
   
   .copy-btn { background: var(--grass); font-family: var(--pixel); color: white; border: none; padding: 16px 30px; font-size: 12px; cursor: pointer; transition: 0.1s; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); }
   .copy-btn span { margin-right: 8px; color: rgba(255,255,255,0.5); }
-  .action-btn { background: var(--accent); font-family: var(--pixel); color: white; border: none; padding: 18px 36px; text-decoration: none; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); }
+  
+  .home-nav { display: flex; flex-direction: column; gap: 20px; width: 100%; max-width: 320px; }
+  .action-btn { background: var(--accent); font-family: var(--pixel); color: white; border: none; padding: 18px 36px; text-decoration: none; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); text-align: center; }
+  .rules-btn { background: var(--stone); font-family: var(--pixel); color: white; border: none; padding: 18px 36px; text-decoration: none; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); text-align: center; }
 
   /* PLATFORM GRID */
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; width: 100%; margin-top: 20px; }
   .card { background: rgba(255,255,255,0.04); border: 2px solid var(--border); padding: 30px; border-radius: 4px; text-align: center; cursor: pointer; transition: 0.2s; }
   .card:hover { transform: translateY(-5px); border-color: var(--pc); background: rgba(255,255,255,0.08); }
-  
   .back-link { align-self: flex-start; font-family: var(--pixel); font-size: 10px; color: var(--grass); text-decoration: none; margin-bottom: 30px; cursor: pointer; }
+
+  /* RULES PAGE */
+  .rules-container { width: 100%; text-align: left; }
+  .rule-block { background: rgba(255,255,255,0.03); border-left: 4px solid var(--gold); padding: 20px; margin-bottom: 25px; border-radius: 0 4px 4px 0; }
+  .rule-block h2 { font-family: var(--pixel); font-size: 14px; color: var(--gold); margin-bottom: 12px; }
+  .rule-block p { font-size: 15px; line-height: 1.6; color: rgba(253,246,227,0.8); }
+  .rule-block ul { margin-top: 10px; padding-left: 20px; color: rgba(253,246,227,0.7); }
+  .rule-block li { margin-bottom: 5px; }
 
   /* TUTORIALS */
   .tutorial-content { text-align: center; width: 100%; }
   .btn-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
-  
   .video-link-btn { background: #ff0000; font-family: var(--pixel); color: white; border: none; padding: 16px 24px; font-size: 10px; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.3); text-decoration: none; }
   .text-guide-btn { background: var(--stone); font-family: var(--pixel); color: white; border: none; padding: 16px 24px; font-size: 10px; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.3); }
-
   .text-guide-box { display: none; background: rgba(0,0,0,0.3); border: 2px solid var(--border); padding: 25px; margin-top: 20px; text-align: left; border-radius: 4px; line-height: 1.6; }
   .text-guide-box.open { display: block; }
-  .text-guide-box ol { padding-left: 20px; }
-  .text-guide-box li { margin-bottom: 10px; }
   .highlight-ip { color: var(--gold); font-family: var(--pixel); font-size: 12px; display: block; margin: 5px 0; }
 
   .pc { --pc: #5bc8f5; } .switch { --pc: #e4000f; } .ps { --pc: #003087; } .xbox { --pc: #107c10; }
@@ -78,7 +84,63 @@
       <span class="ip-address">play.meincraft.xyz</span>
       <button class="copy-btn" id="copyBtn" onclick="copyIP()"><span>&#9632;</span> Copy IP</button>
     </div>
-    <button class="action-btn" onclick="showView('platform-view')">How to Join</button>
+    <div class="home-nav">
+      <button class="action-btn" onclick="showView('platform-view')">How to Join</button>
+      <button class="rules-btn" onclick="showView('rules-view')">The Ten Commandments</button>
+    </div>
+  </section>
+
+  <section id="rules-view" class="page-view">
+    <div class="back-link" onclick="showView('home-view')">← Back</div>
+    <div class="hero"><h1 class="logo-title" style="font-size: 28px;">THE RULES</h1></div>
+    <div class="rules-container">
+      <div class="rule-block">
+        <h2>I. Modifications</h2>
+        <p>No external modifications that give an unfair advantage (e.g. x-ray, freecam, moving in inventory, or mouse tweaks). Allowed mods include Litematica, Xaero's Minimap, and Worldmap.</p>
+      </div>
+      <div class="rule-block">
+        <h2>II. Hacking & Exploits</h2>
+        <p>No hacking or exploiting, including any sort of hack client. We have an active anticheat. You must contact support immediately if you discover an exploit, glitch, or bug. Any gain, even accidental, must be reported.</p>
+      </div>
+      <div class="rule-block">
+        <h2>III. Griefing</h2>
+        <p>Griefing is allowed; however, it is the people's choice what to do and not up to rules or moderators.</p>
+      </div>
+      <div class="rule-block">
+        <h2>IV. Punishment Circumvention</h2>
+        <p>Users are not allowed to avoid or bypass punishments. Any circumvention with alt accounts may result in a ban on all accounts. Use of server-chat while muted/banned is prohibited.</p>
+      </div>
+      <div class="rule-block">
+        <h2>V. Complicity</h2>
+        <p>Players involved in breaking rules (assisting, participating, or benefiting) may be punished as if they committed the act themselves.</p>
+      </div>
+      <div class="rule-block">
+        <h2>VI. Server Disruption</h2>
+        <p>Intentionally lagging the server, intervening in staff operations, DOS/DDOS attacks, or spamming tickets is strictly prohibited. Mass spawning of entities (boats, minecarts, items) that causes lag will result in automatic despawning.</p>
+      </div>
+      <div class="rule-block">
+        <h2>VII. Personal Information (Doxxing)</h2>
+        <p>Sharing personal information of others (names, photos, videos, phone numbers, locations) is strictly prohibited. The threat to use personal information is also banned regardless of intent.</p>
+      </div>
+      <div class="rule-block">
+        <h2>VIII. Impersonation & Defamation</h2>
+        <p>Impersonating players or staff via usernames, skins, or nicknames is banned. Spreading false information (defamation), faking evidence, or making unfounded allegations (e.g. pedophilia) will result in severe punishment.</p>
+      </div>
+      <div class="rule-block">
+        <h2>IX. Compliance</h2>
+        <p>All named items, titles, nicknames, and Discord accounts must be compliant with Rule X and must be presented in English characters (no accents/symbols).</p>
+      </div>
+      <div class="rule-block">
+        <h2>X. Respect & Toxicity</h2>
+        <p>Spamming, harassment, bullying, and hate speech are not tolerated. This includes:</p>
+        <ul>
+          <li>Discriminatory language towards racial, social, or religious identities.</li>
+          <li>Encouraging self-harm or Nazism.</li>
+          <li>Sexual or explicit content.</li>
+          <li>Political roleplay/larping involving ongoing real-world conflicts (e.g. Ukraine, Russia, Palestine, Israel).</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <section id="platform-view" class="page-view">
@@ -96,94 +158,26 @@
     <div class="back-link" onclick="showView('platform-view')">← Back</div>
     <div class="tutorial-content">
       <h1>PC Connection</h1>
-      <p>Java Edition instructions</p>
       <div class="btn-group">
         <a href="https://www.youtube.com/watch?v=XVT6gx8Bl6Y&t=46s" target="_blank" class="video-link-btn">VIDEO TUTORIAL</a>
         <button class="text-guide-btn" onclick="toggleText('tg-pc')">TEXT INSTRUCTIONS</button>
       </div>
       <div id="tg-pc" class="text-guide-box">
-        <ol>
+        <ol style="margin-left: 20px;">
           <li>Launch Minecraft: Java Edition.</li>
-          <li>Click <strong>Multiplayer</strong> > <strong>Add Server</strong>.</li>
-          <li>In the <strong>Server Address</strong> box, put the server IP: <span class="highlight-ip">play.meincraft.xyz</span></li>
-          <li>Click <strong>Done</strong> and double-click the server to join!</li>
+          <li>Click Multiplayer > Add Server.</li>
+          <li>Enter Server Address: <span class="highlight-ip">play.meincraft.xyz</span></li>
+          <li>Click Done and join!</li>
         </ol>
       </div>
     </div>
   </section>
 
-  <section id="switch-tutorial" class="page-view">
-    <div class="back-link" onclick="showView('platform-view')">← Back</div>
-    <div class="tutorial-content">
-      <h1>Switch Connection</h1>
-      <p>Bedrock Edition instructions</p>
-      <div class="btn-group">
-        <a href="https://www.youtube.com/watch?v=zalT_oR1nPM" target="_blank" class="video-link-btn">VIDEO TUTORIAL</a>
-        <button class="text-guide-btn" onclick="toggleText('tg-sw')">TEXT INSTRUCTIONS</button>
-      </div>
-      <div id="tg-sw" class="text-guide-box">
-        <ol>
-          <li>System Settings > Internet > Internet Settings.</li>
-          <li>Select your Wi-Fi > Change Settings > DNS Settings > Manual.</li>
-          <li>Set Primary DNS to <code>104.238.130.180</code> and Secondary to <code>8.8.8.8</code>.</li>
-          <li>Open Minecraft > Servers tab > Join any featured server.</li>
-          <li>In the menu that appears, select <strong>Connect to a Server</strong>.</li>
-          <li>Under Server Address, put the server IP: <span class="highlight-ip">play.meincraft.xyz</span></li>
-          <li>Click <strong>Submit</strong> to play!</li>
-        </ol>
-      </div>
-    </div>
-  </section>
-
-  <section id="ps-tutorial" class="page-view">
-    <div class="back-link" onclick="showView('platform-view')">← Back</div>
-    <div class="tutorial-content">
-      <h1>PlayStation Connection</h1>
-      <p>Bedrock Edition instructions</p>
-      <div class="btn-group">
-        <a href="https://www.youtube.com/watch?v=YyMY6fqzUNs&t=5s" target="_blank" class="video-link-btn">VIDEO TUTORIAL</a>
-        <button class="text-guide-btn" onclick="toggleText('tg-ps')">TEXT INSTRUCTIONS</button>
-      </div>
-      <div id="tg-ps" class="text-guide-box">
-        <ol>
-          <li>Set up your Internet Connection > Custom > Manual DNS.</li>
-          <li>Primary DNS: <code>104.238.130.180</code> | Secondary DNS: <code>8.8.8.8</code>.</li>
-          <li>Launch Minecraft > Servers > Join any featured server.</li>
-          <li>Select <strong>Connect to a Server</strong> in the BedrockConnect menu.</li>
-          <li>Put the server IP in the address box: <span class="highlight-ip">play.meincraft.xyz</span></li>
-          <li>Select <strong>Add to list</strong> and click <strong>Submit</strong>.</li>
-        </ol>
-      </div>
-    </div>
-  </section>
-
-  <section id="xbox-tutorial" class="page-view">
-    <div class="back-link" onclick="showView('platform-view')">← Back</div>
-    <div class="tutorial-content">
-      <h1>Xbox Connection</h1>
-      <p>Bedrock Edition instructions</p>
-      <div class="btn-group">
-        <a href="https://www.youtube.com/watch?v=0vIhBWaBDig&t=27s" target="_blank" class="video-link-btn">VIDEO TUTORIAL</a>
-        <button class="text-guide-btn" onclick="toggleText('tg-xb')">TEXT INSTRUCTIONS</button>
-      </div>
-      <div id="tg-xb" class="text-guide-box">
-        <ol>
-          <li>Settings > General > Network Settings > Advanced > DNS > Manual.</li>
-          <li>Primary DNS: <code>104.238.130.180</code> | Secondary DNS: <code>8.8.8.8</code>.</li>
-          <li>Launch Minecraft > Servers tab > Join any featured server.</li>
-          <li>In the pop-up menu, choose <strong>Connect to a Server</strong>.</li>
-          <li>Where it asks for address, put the server IP: <span class="highlight-ip">play.meincraft.xyz</span></li>
-          <li>Submit and enjoy!</li>
-        </ol>
-      </div>
-    </div>
-  </section>
-</main>
+  </main>
 
 <script>
   function showView(id) {
     document.querySelectorAll('.page-view').forEach(v => v.classList.remove('active'));
-    document.querySelectorAll('.text-guide-box').forEach(b => b.classList.remove('open'));
     document.getElementById(id).classList.add('active');
     window.scrollTo(0,0);
   }
