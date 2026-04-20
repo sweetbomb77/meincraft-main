@@ -10,7 +10,7 @@
     --grass: #5d9e2f; --dirt: #8b5e3c; --stone: #8d8d8d; --sky: #5bc8f5;
     --night: #0d1b2a; --star: #fff9c4; --cream: #fdf6e3; --gold: #ffd700;
     --accent: #ff6b35; --dark: #111827; --panel: rgba(13,27,42,0.82);
-    --border: rgba(255,255,255,0.08);
+    --border: rgba(255,255,255,0.08); --discord: #5865F2;
     --pixel: 'Press Start 2P', monospace; --body: 'Nunito', sans-serif; --mono: 'VT323', monospace;
   }
 
@@ -26,7 +26,13 @@
   .grass-row { height: 18px; background: var(--grass); image-rendering: pixelated; }
   .dirt-row { height: 32px; background: var(--dirt); }
 
-  main { position: relative; z-index: 2; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 60px 20px 120px; }
+  /* DISCORD TOP LEFT */
+  .discord-fixed { position: fixed; top: 20px; left: 20px; z-index: 100; }
+  .discord-btn { background: var(--discord); display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; border-radius: 4px; box-shadow: 4px 4px 0 rgba(0,0,0,0.3); transition: 0.1s; text-decoration: none; }
+  .discord-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 rgba(0,0,0,0.4); }
+  .discord-btn svg { width: 30px; fill: white; }
+
+  main { position: relative; z-index: 2; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 80px 20px 120px; }
   .page-view { display: none; width: 100%; max-width: 900px; flex-direction: column; align-items: center; }
   .page-view.active { display: flex; }
 
@@ -42,10 +48,19 @@
   .home-nav { display: flex; flex-direction: column; gap: 20px; width: 100%; max-width: 400px; }
   .action-btn { background: var(--accent); font-family: var(--pixel); color: white; border: none; padding: 22px; font-size: 14px; text-decoration: none; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); text-align: center; }
   .rules-btn { background: var(--stone); font-family: var(--pixel); color: white; border: none; padding: 22px; font-size: 14px; text-decoration: none; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); text-align: center; }
+  .disabled-btn { background: #5a1212; font-family: var(--pixel); color: #ff6b6b; border: 2px solid #ff4444; padding: 22px; font-size: 14px; text-decoration: none; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); text-align: center; }
 
-  /* RULES CONTENT */
-  .rules-text-wrapper { background: var(--panel); border: 2px solid var(--border); padding: 40px; border-radius: 4px; text-align: left; white-space: pre-line; font-family: var(--body); font-size: 16px; line-height: 1.8; color: var(--cream); }
+  /* RULES STYLING */
+  .rule-warning { font-family: var(--pixel); color: #ff4444; font-size: 12px; text-align: center; margin-bottom: 30px; line-height: 1.5; }
+  .rules-container { width: 100%; text-align: left; }
+  .rule-block { background: rgba(255,255,255,0.03); border-left: 4px solid var(--gold); padding: 25px; margin-bottom: 20px; border-radius: 0 4px 4px 0; white-space: pre-line; }
+  .rule-block h2 { font-family: var(--pixel); font-size: 12px; color: var(--gold); margin-bottom: 15px; }
+  .rule-block p { font-size: 16px; line-height: 1.7; color: var(--cream); }
   .back-link { align-self: flex-start; font-family: var(--pixel); font-size: 10px; color: var(--grass); text-decoration: none; margin-bottom: 30px; cursor: pointer; }
+
+  /* DISABLED PAGE STYLING */
+  .disabled-list { background: var(--panel); border: 2px solid #ff4444; padding: 40px; border-radius: 4px; width: 100%; text-align: center; }
+  .disabled-item { font-family: var(--pixel); color: #ff6b6b; font-size: 18px; margin: 20px 0; text-transform: uppercase; }
 
   /* PLATFORM GRID */
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; width: 100%; margin-top: 20px; }
@@ -68,6 +83,12 @@
 </head>
 <body>
 
+<div class="discord-fixed">
+  <a href="https://discord.gg/UBgK2vvcmH" target="_blank" class="discord-btn" title="Join our Discord">
+    <svg viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.06,72.06,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.4,80.21a105.73,105.73,0,0,0,32.17,16.15,77.7,77.7,0,0,0,6.89-11.11,68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c3.39-29.09-5.46-52.74-23.86-72.14ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.07,65.69,84.69,65.69Z"/></svg>
+  </a>
+</div>
+
 <div id="stars"></div>
 <div class="ground-strip"><div class="grass-row"></div><div class="dirt-row"></div></div>
 
@@ -84,75 +105,104 @@
     <div class="home-nav">
       <button class="action-btn" onclick="showView('platform-view')">How to Join</button>
       <button class="rules-btn" onclick="showView('rules-view')">The Ten Commandments</button>
+      <button class="disabled-btn" onclick="showView('disabled-view')">Currently Disabled</button>
+    </div>
+  </section>
+
+  <section id="disabled-view" class="page-view">
+    <div class="back-link" onclick="showView('home-view')">← Back</div>
+    <div class="hero"><h1>Restricted Features</h1></div>
+    <div class="disabled-list">
+      <div class="disabled-item">✖ ALL Diamond Armour</div>
+      <div class="disabled-item">✖ Enchantment Tables</div>
+      <div class="disabled-item">✖ The Nether</div>
+      <div class="disabled-item">✖ The End</div>
+      <p style="margin-top: 30px; font-family: var(--mono); font-size: 20px;">These items and dimensions are currently unavailable on the server.</p>
     </div>
   </section>
 
   <section id="rules-view" class="page-view">
     <div class="back-link" onclick="showView('home-view')">← Back</div>
+    <div class="rule-warning">THESE RULES ARE SUBJECT TO CHANGE AT ANYTIME</div>
     <div class="hero"><h1>The Ten Commandments</h1></div>
-    <div class="rules-text-wrapper">
-Rule 1: No external modifications that give a unfair advantage e.g x-ray, freecam, moving in inventory or mouse tweaks. Allowed mods include litematica, xaero's minimap and worldmap.
+    
+    <div class="rules-container">
+      <div class="rule-block">
+        <h2>COMMANDMENT I</h2>
+        <p>Rule 1: No external modifications that give a unfair advantage e.g x-ray, freecam, moving in inventory or mouse tweaks. Allowed mods include litematica, xaero's minimap and worldmap.</p>
+      </div>
+      <div class="rule-block">
+        <h2>COMMANDMENT II</h2>
+        <p>Rule 2: No hacking or exploiting including any sort of hack client or single or hack (we have an anticheat)</p>
+      </div>
+      <div class="rule-block">
+        <h2>COMMANDMENT III</h2>
+        <p>Rule 3: Major greifing is NOT allowed and any intentional breaking of farms or killing of villagers not owned by you are not allowed</p>
+      </div>
+      <div class="rule-block">
+        <h2>COMMANDMENT IV</h2>
+        <p>Rule 4: Users are not allowed to avoid or bypass punishments. Any circumvention with alt accounts may result in a ban on all accounts. Any use of the server-chat while muted or banned is also not permitted.</p>
+      </div>
+      <div class="rule-block">
+        <h2>COMMANDMENT V</h2>
+        <p>Rule 5: Players who are involved in the breaking of rules may be punished depending on the rule broken, previous history and the severity of the issue. This includes assisting, participating or benefiting from others breaking the rules. It could be treated as if they committed the act.
 
-Rule 2: No hacking or exploiting including any sort of hack client or single or hack (we have an anticheat)
+        All users are expected to contact support immediately if they have discovered an exploit, glitch, or bug. Any gain, even accidental, must be reported immediately. Players who take advantage of any bugs, glitches, or exploit will be punished depending on severity.</p>
+      </div>
+      <div class="rule-block">
+        <h2>COMMANDMENT VI</h2>
+        <p>Rule 6: Any form of disrupting server activity (e.g. intentionally lagging the server, intervening in staff operations such as responding to tickets or player concerns, performing denial of service attacks [DOS] or distributed denial of service attacks [DDOS], making unnecessary tickets in our support discord, or spamming tickets) is not allowed and players will be punished depending on severity. Any severe form of server disruption (DDOS attacks) will be reported to the proper authorities.
 
-Rule 3: Greifing is allowed however its the people's choice what to do and not up to rules or moderators
+        Mass spawning of entities (ex. Boats, minecarts, dropped items) is not allowed and will result in the automatic despawning of said entities.</p>
+      </div>
+      <div class="rule-block">
+        <h2>COMMANDMENT VII</h2>
+        <p>Rule 7: Sharing personal information of other players is not allowed (Doxxing). Examples of personal information are (but not limited to) full names, photos / videos of players' real-life identities, phone numbers, social network profiles, contact details and locations of players' home/school/work.
 
-Rule 4: Users are not allowed to avoid or bypass punishments. Any circumvention with alt accounts may result in a ban on all accounts. Any use of the server-chat while muted or banned is also not permitted.
+        The use of (or threat to use) players' personal information is strictly prohibited under all circumstances, for any purpose, regardless of intent or justification.</p>
+      </div>
+      <div class="rule-block">
+        <h2>COMMANDMENT VIII</h2>
+        <p>Rule 8: Any form of impersonation is not allowed. This includes, but is not limited to, changing your username, nickname or town and nation names to closely resemble or imitate another player or entity. It may also apply to skins in some instances. Impersonation of staff in any form is not allowed.
 
-Rule 5: Players who are involved in the breaking of rules may be punished depending on the rule broken, previous history and the severity of the issue. This includes assisting, participating or benefiting from others breaking the rules. It could be treated as if they committed the act.
+        Players who intentionally impersonate others in a way that cause harm or disruption may be subject to harsher punishments such as permanent bans.
 
-All users are expected to contact support immediately if they have discovered an exploit, glitch, or bug. Any gain, even accidental, must be reported immediately. Players who take advantage of any bugs, glitches, or exploit will be punished depending on severity.
+        Comments or discussions that harm a player's real-life identity or reputation, such as spreading false or misleading information (defamation) are not allowed.
 
-Rule 6: Any form of disrupting server activity (e.g. intentionally lagging the server, intervening in staff operations such as responding to tickets or player concerns, performing denial of service attacks [DOS] or distributed denial of service attacks [DDOS], making unnecessary tickets in our support discord, or spamming tickets) is not allowed and players will be punished depending on severity. Any severe form of server disruption (DDOS attacks) will be reported to the proper authorities.
+        This includes, but is not limited to, making allegations of pedophilia in public chat. Any legitimate concerns should be reported through a ticket with supporting evidence. False or unfounded accusations will result in punishment.
 
-Mass spawning of entities (ex. Boats, minecarts, dropped items) is not allowed and will result in the automatic despawning of said entities.
+        This rule also covers any attempt to mislead players, undermine trust, or damage the reputation of DMC or its staff. Prohibited behavior includes, but is not limited to:
+        • Fabricating, altering, or falsifying evidence
+        • Intentionally submitting false or misleading tickets
+        • Faking statements or screenshots
+        • Intentionally spreading false rumors about the server, its staff, or its community</p>
+      </div>
+      <div class="rule-block">
+        <h2>COMMANDMENT IX</h2>
+        <p>Rule 9: All named items and entities in-game, usernames, titles, nicknames, and discord accounts must be compliant with rule 10. This also includes plot names, town cultures, etc. Generally, they must be presented in English characters (no accents, symbols, etc.).
 
-Rule 7: Sharing personal information of other players is not allowed (Doxxing). Examples of personal information are (but not limited to) full names, photos / videos of players' real-life identities, phone numbers, social network profiles, contact details and locations of players' home/school/work.
+        Staff may rename or remove them, in addition to applying punishments.</p>
+      </div>
+      <div class="rule-block">
+        <h2>COMMANDMENT X</h2>
+        <p>Rule 10: Spamming, which is the act of repeatedly and swiftly sending messages in chat, is not allowed. This includes messages with all caps, spam of text, phrases, duplicates of text, copypastas, emojis, videos, images, links, GIFs, and pings. Mass pinging is not allowed.
 
-The use of (or threat to use) players' personal information is strictly prohibited under all circumstances, for any purpose, regardless of intent or justification.
+        It is expected that all players remain respectful. Examples of toxicity include, but are not limited to:
+        • Harassment or bullying of other players or staff members, including but not limited to targeted insults, attempting to bypass blocks (/ignore), repeated provocation or unprovoked killings, and excessive town camping
+        • Repeat demands to staff, intentionally testing server boundaries to provoke a reaction.
+        • Inciting violence or toxicity
+        • Messages that involve considerable amounts of profanity
 
-Rule 8: Any form of impersonation is not allowed. This includes, but is not limited to, changing your username, nickname or town and nation names to closely resemble or imitate another player or entity. It may also apply to skins in some instances. Impersonation of staff in any form is not allowed.
+        Punishments may vary depending on severity and/or previous history. Unwanted behavior includes:
+        • Bypassing chat filter
+        • Discriminatory language or hate speech towards racial and social identities
+        • Encouraging self-harm or violence towards players
+        • Nazism
+        • Sensitive or explicit topics (sexual content)
+        • Any inappropriate interactions towards other players
 
-Players who intentionally impersonate others in a way that cause harm or disruption may be subject to harsher punishments such as permanent bans.
-
-Comments or discussions that harm a player's real-life identity or reputation, such as spreading false or misleading information (defamation) are not allowed.
-
-This includes, but is not limited to, making allegations of pedophilia in public chat. Any legitimate concerns should be reported through a ticket with supporting evidence. False or unfounded accusations will result in punishment.
-
-This rule also covers any attempt to mislead players, undermine trust, or damage the reputation of DMC or its staff. Prohibited behavior includes, but is not limited to:
-
-• Fabricating, altering, or falsifying evidence
-• Intentionally submitting false or misleading tickets
-• Faking statements or screenshots
-• Intentionally spreading false rumors about the server, its staff, or its community
-
-Rule 9: All named items and entities in-game, usernames, titles, nicknames, and discord accounts must be compliant with rule 10. This also includes plot names, town cultures, etc. Generally, they must be presented in English characters (no accents, symbols, etc.).
-
-Staff may rename or remove them, in addition to applying punishments.
-
-Rule 10: Spamming, which is the act of repeatedly and swiftly sending messages in chat, is not allowed. This includes messages with all caps, spam of text, phrases, duplicates of text, copypastas, emojis, videos, images, links, GIFs, and pings. Mass pinging is not allowed.
-
-It is expected that all players remain respectful. Examples of toxicity include, but are not limited to:
-
-• Harassment or bullying of other players or staff members, including but not limited to targeted insults, attempting to bypass blocks (/ignore), repeated provocation or unprovoked killings, and excessive town camping
-• Repeat demands to staff, intentionally testing server boundaries to provoke a reaction. Concerns about staff conduct must be submitted through a support ticket, not through public or in-game confrontation
-• Inciting violence or toxicity
-• Messages that involve considerable amounts of profanity
-
-Punishments may vary depending on severity and/or previous history of players. Unwanted behavior, which includes the actions of, but not limited to:
-
-• Bypassing chat filter
-• Discriminatory language or hate speech towards racial and social identities (nationality, ethnicity, race, gender, sexual orientation, religion, age, etc.)
-• Encouraging self-harm or violence towards players
-• Nazism
-• Sensitive or explicit topics that do not fit the server environment, such as sexual content
-• Any inappropriate interactions towards other players
-
-Builds, signs, flags, banners, named items or entities, books, usernames, nicknames or skins may also fall under this rule.
-
-To maintain a respectful environment, we ask that roleplay/larping involving Israel, Palestine, Gaza, Turkey, Iran, Ukraine, and Russia be limited due to the ongoing real-world conflicts and sensitive geopolitical circumstances surrounding these regions.
-
-This rule also extends to any banned player related content.
+        To maintain a respectful environment, we ask that roleplay/larping involving Israel, Palestine, Gaza, Turkey, Iran, Ukraine, and Russia be limited due to ongoing conflicts.</p>
+      </div>
     </div>
   </section>
 
@@ -197,8 +247,7 @@ This rule also extends to any banned player related content.
       <div id="tg-sw" class="text-guide-box">
         <ol>
           <li>Settings > Internet > Internet Settings.</li>
-          <li>Choose Wi-Fi > Change Settings > DNS Settings > Manual.</li>
-          <li>Primary DNS: <code>104.238.130.180</code> | Secondary: <code>8.8.8.8</code>.</li>
+          <li>Manual DNS: Primary <code>104.238.130.180</code> | Secondary <code>8.8.8.8</code>.</li>
           <li>Launch Minecraft > Servers > Join any featured server.</li>
           <li>Select 'Connect to a Server' and enter the IP: <span class="highlight-ip">play.meincraft.xyz</span></li>
         </ol>
@@ -216,8 +265,7 @@ This rule also extends to any banned player related content.
       </div>
       <div id="tg-ps" class="text-guide-box">
         <ol>
-          <li>Settings > Network > Set Up Internet Connection > Custom.</li>
-          <li>DNS Settings > Manual.</li>
+          <li>Network Settings > Custom DNS.</li>
           <li>Primary DNS: <code>104.238.130.180</code> | Secondary: <code>8.8.8.8</code>.</li>
           <li>Launch Minecraft > Servers > Join any featured server.</li>
           <li>In the menu, click 'Connect to a Server' and enter the IP: <span class="highlight-ip">play.meincraft.xyz</span></li>
@@ -236,7 +284,7 @@ This rule also extends to any banned player related content.
       </div>
       <div id="tg-xb" class="text-guide-box">
         <ol>
-          <li>Settings > Network > Advanced > DNS > Manual.</li>
+          <li>Network Settings > Advanced > DNS > Manual.</li>
           <li>Primary DNS: <code>104.238.130.180</code> | Secondary: <code>8.8.8.8</code>.</li>
           <li>Launch Minecraft > Servers > Join any featured server.</li>
           <li>Choose 'Connect to a Server' and enter the server IP: <span class="highlight-ip">play.meincraft.xyz</span></li>
@@ -244,7 +292,6 @@ This rule also extends to any banned player related content.
       </div>
     </div>
   </section>
-
 </main>
 
 <script>
@@ -262,9 +309,7 @@ This rule also extends to any banned player related content.
     const btn = document.getElementById('copyBtn');
     navigator.clipboard.writeText('play.meincraft.xyz').then(() => {
       btn.textContent = '✔ Copied!';
-      setTimeout(() => {
-        btn.innerHTML = '<span>&#9632;</span> Copy IP';
-      }, 2000);
+      setTimeout(() => { btn.innerHTML = '<span>&#9632;</span> Copy IP'; }, 2000);
     });
   }
 
