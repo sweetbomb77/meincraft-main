@@ -15,14 +15,15 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: var(--night); color: var(--cream); font-family: var(--body); overflow-x: hidden; min-height: 100vh; }
+  body { background: var(--night); color: var(--cream); font-family: var(--body); overflow-x: hidden; min-height: 100vh; padding-bottom: 60px; }
 
   /* STARFIELD */
   #stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
   .star { position: absolute; border-radius: 50%; background: white; animation: twinkle var(--d, 3s) infinite alternate; }
   @keyframes twinkle { from { opacity: 0.2; } to { opacity: 1; } }
 
-  .ground-strip { position: fixed; bottom: 0; left: 0; right: 0; z-index: 1; pointer-events: none; }
+  /* FIXED BOTTOM STRIP WITH FIX FOR SCROLLING OVERLAP */
+  .ground-strip { position: fixed; bottom: 0; left: 0; right: 0; z-index: 10; pointer-events: none; background: var(--night); }
   .grass-row { height: 18px; background: var(--grass); image-rendering: pixelated; }
   .dirt-row { height: 32px; background: var(--dirt); }
 
@@ -37,30 +38,39 @@
   .page-view.active { display: flex; }
 
   /* HOME PAGE */
-  .hero { text-align: center; margin-bottom: 56px; }
+  .hero { text-align: center; margin-bottom: 40px; }
   .logo-title { font-family: var(--pixel); font-size: clamp(26px, 6vw, 52px); color: var(--cream); text-shadow: 4px 4px 0 var(--grass); margin-bottom: 18px; }
-  .ip-card { background: var(--panel); border: 2px solid var(--grass); border-radius: 4px; padding: 28px 40px; text-align: center; margin-bottom: 52px; width: 100%; max-width: 520px; }
+  .ip-card { background: var(--panel); border: 2px solid var(--grass); border-radius: 4px; padding: 28px 40px; text-align: center; margin-bottom: 40px; width: 100%; max-width: 520px; }
   .ip-address { font-family: var(--pixel); font-size: 18px; color: var(--gold); margin-bottom: 25px; display: block; }
   
   .copy-btn { background: var(--grass); font-family: var(--pixel); color: white; border: none; padding: 16px 30px; font-size: 12px; cursor: pointer; transition: 0.1s; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); }
   .copy-btn span { margin-right: 8px; color: rgba(255,255,255,0.5); }
   
-  .home-nav { display: flex; flex-direction: column; gap: 20px; width: 100%; max-width: 400px; }
-  .action-btn { background: var(--accent); font-family: var(--pixel); color: white; border: none; padding: 22px; font-size: 14px; text-decoration: none; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); text-align: center; }
-  .rules-btn { background: var(--stone); font-family: var(--pixel); color: white; border: none; padding: 22px; font-size: 14px; text-decoration: none; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); text-align: center; }
-  .disabled-btn { background: #5a1212; font-family: var(--pixel); color: #ff6b6b; border: 2px solid #ff4444; padding: 22px; font-size: 14px; text-decoration: none; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); text-align: center; }
+  .home-nav { display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 400px; }
+  .action-btn { background: var(--accent); font-family: var(--pixel); color: white; border: none; padding: 20px; font-size: 12px; text-decoration: none; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); text-align: center; }
+  .rules-btn { background: var(--stone); font-family: var(--pixel); color: white; border: none; padding: 20px; font-size: 12px; text-decoration: none; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); text-align: center; }
+  .disabled-btn { background: #5a1212; font-family: var(--pixel); color: #ff6b6b; border: 2px solid #ff4444; padding: 20px; font-size: 12px; text-decoration: none; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); text-align: center; }
+  .events-btn { background: #4a354f; font-family: var(--pixel); color: #dfb2f4; border: 2px solid #8e55a4; padding: 20px; font-size: 12px; text-decoration: none; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); text-align: center; }
+  .vc-btn { background: #2a52be; font-family: var(--pixel); color: #a3c1ad; border: 2px solid #4169e1; padding: 20px; font-size: 12px; text-decoration: none; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); text-align: center; }
 
   /* RULES STYLING */
-  .rule-warning { font-family: var(--pixel); color: #ff4444; font-size: 12px; text-align: center; margin-bottom: 30px; line-height: 1.5; }
+  .rule-warning { font-family: var(--pixel); color: #ff4444; font-size: 11px; text-align: center; margin-bottom: 30px; line-height: 1.5; }
   .rules-container { width: 100%; text-align: left; }
-  .rule-block { background: rgba(255,255,255,0.03); border-left: 4px solid var(--gold); padding: 25px; margin-bottom: 20px; border-radius: 0 4px 4px 0; white-space: pre-line; }
+  .rule-block { background: rgba(255,255,255,0.03); border-left: 4px solid var(--gold); padding: 25px; margin-bottom: 20px; border-radius: 0 4px 4px 0; }
   .rule-block h2 { font-family: var(--pixel); font-size: 12px; color: var(--gold); margin-bottom: 15px; }
-  .rule-block p { font-size: 16px; line-height: 1.7; color: var(--cream); }
+  .rule-block p { font-size: 16px; line-height: 1.7; color: var(--cream); white-space: pre-wrap; }
   .back-link { align-self: flex-start; font-family: var(--pixel); font-size: 10px; color: var(--grass); text-decoration: none; margin-bottom: 30px; cursor: pointer; }
 
   /* DISABLED PAGE STYLING */
   .disabled-list { background: var(--panel); border: 2px solid #ff4444; padding: 40px; border-radius: 4px; width: 100%; text-align: center; }
-  .disabled-item { font-family: var(--pixel); color: #ff6b6b; font-size: 18px; margin: 20px 0; text-transform: uppercase; }
+  .disabled-item { font-family: var(--pixel); color: #ff6b6b; font-size: 16px; margin: 20px 0; text-transform: uppercase; }
+
+  /* EVENTS PAGE STYLING */
+  .events-list { background: var(--panel); border: 2px solid #8e55a4; padding: 40px; border-radius: 4px; width: 100%; }
+  .event-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px 0; }
+  .event-item:last-child { border-bottom: none; }
+  .event-title { font-family: var(--pixel); color: #dfb2f4; font-size: 16px; margin-bottom: 10px; text-transform: uppercase; }
+  .event-time { font-family: var(--mono); color: var(--gold); font-size: 24px; }
 
   /* PLATFORM GRID */
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; width: 100%; margin-top: 20px; }
@@ -69,16 +79,19 @@
 
   /* TUTORIALS */
   .tutorial-content { text-align: center; width: 100%; }
-  .btn-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
+  .btn-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px; margin-bottom: 10px; }
   .video-link-btn { background: #ff0000; font-family: var(--pixel); color: white; border: none; padding: 16px 24px; font-size: 10px; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.3); text-decoration: none; }
   .text-guide-btn { background: var(--stone); font-family: var(--pixel); color: white; border: none; padding: 16px 24px; font-size: 10px; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.3); }
+  .link-action-btn { background: #2a52be; font-family: var(--pixel); color: white; border: none; padding: 16px 24px; font-size: 10px; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.3); text-decoration: none; }
   .text-guide-box { display: none; background: rgba(0,0,0,0.3); border: 2px solid var(--border); padding: 25px; margin-top: 20px; text-align: left; border-radius: 4px; }
   .text-guide-box.open { display: block; }
   .text-guide-box ol { padding-left: 20px; color: var(--cream); line-height: 1.6; }
   .text-guide-box li { margin-bottom: 10px; }
   .highlight-ip { color: var(--gold); font-family: var(--pixel); font-size: 12px; display: block; margin: 5px 0; }
+  .url-link { color: var(--sky); text-decoration: underline; word-break: break-all; }
 
   .pc { --pc: #5bc8f5; } .switch { --pc: #e4000f; } .ps { --pc: #003087; } .xbox { --pc: #107c10; }
+  .mod-style { --pc: #2a52be; } .discord-style { --pc: #5865F2; }
 </style>
 </head>
 <body>
@@ -93,6 +106,7 @@
 <div class="ground-strip"><div class="grass-row"></div><div class="dirt-row"></div></div>
 
 <main>
+  <!-- HOME -->
   <section id="home-view" class="page-view active">
     <div class="hero">
       <h1 class="logo-title">MEINCRAFT</h1>
@@ -103,108 +117,134 @@
       <button class="copy-btn" id="copyBtn" onclick="copyIP()"><span>&#9632;</span> Copy IP</button>
     </div>
     <div class="home-nav">
-      <button class="action-btn" onclick="showView('platform-view')">How to Join</button>
-      <button class="rules-btn" onclick="showView('rules-view')">The Ten Commandments</button>
+      <button class="action-btn" onclick="showView('platform-view')">How to Join Server</button>
+      <button class="vc-btn" onclick="showView('vc-view')">How to Join Voicechat</button>
+      <button class="rules-btn" onclick="showView('rules-view')">Rules</button>
+      <button class="events-btn" onclick="showView('events-view')">Server Events</button>
       <button class="disabled-btn" onclick="showView('disabled-view')">Currently Disabled</button>
     </div>
   </section>
 
+  <!-- DISABLED FEATURES VIEW -->
   <section id="disabled-view" class="page-view">
     <div class="back-link" onclick="showView('home-view')">← Back</div>
     <div class="hero"><h1>Restricted Features</h1></div>
     <div class="disabled-list">
-      <div class="disabled-item">✖ Enchantment Tables</div>
+      <div class="disabled-item">✖ Netherite Armour</div>
+      <div class="disabled-item">✖ Totems (Max 3 in inventory only)</div>
       <div class="disabled-item">✖ The Nether</div>
       <div class="disabled-item">✖ The End</div>
-      <p style="margin-top: 30px; font-family: var(--mono); font-size: 20px;">These items and dimensions are currently unavailable on the server.</p>
+      <p style="margin-top: 30px; font-family: var(--mono); font-size: 20px;">These items and dimensions are restricted or altered on the server.</p>
     </div>
   </section>
 
+  <!-- EVENTS VIEW -->
+  <section id="events-view" class="page-view">
+    <div class="back-link" onclick="showView('home-view')">← Back</div>
+    <div class="hero"><h1>Upcoming Events</h1></div>
+    <div class="events-list">
+      <div class="event-item">
+        <div class="event-title">The Nether Event</div>
+        <div class="event-time">Saturday 13th June @ 3:00 PM BST</div>
+      </div>
+      <div class="event-item">
+        <div class="event-title">The End Event</div>
+        <div class="event-time">Saturday 20th June @ 3:00 PM BST</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RULES VIEW -->
   <section id="rules-view" class="page-view">
     <div class="back-link" onclick="showView('home-view')">← Back</div>
-    <div class="rule-warning">THESE RULES ARE SUBJECT TO CHANGE AT ANYTIME</div>
-    <div class="hero"><h1>The Ten Commandments</h1></div>
+    <div class="rule-warning">THESE RULES ARE SUBJECT TO CHANGE AT ANY TIME</div>
+    <div class="hero"><h1>Server Rules</h1></div>
     
     <div class="rules-container">
       <div class="rule-block">
-        <h2>COMMANDMENT I</h2>
-        <p>Rule 1: No external modifications that give a unfair advantage e.g x-ray, freecam, moving in inventory or mouse tweaks. Allowed mods include litematica and xaero's worldmap (without entity tracking) but not minimap.</p>
+        <h2>RULE 1</h2>
+        <p>No hacks or mods that give players a large advantage over others, examples that are not allowed include xaero's minimap and worldmap, x-ray of any kind, freecam, inventory movement and more, (If you are unsure ask before you get banned)</p>
       </div>
       <div class="rule-block">
-        <h2>COMMANDMENT II</h2>
-        <p>Rule 2: No hacking or exploiting including any sort of hack client or single or hack (we have an anticheat)</p>
+        <h2>RULE 2</h2>
+        <p>If there is a house with the purpose just for building, that cannot be griefed and if there are chests that only include building materials cannot be stolen. Pvp gear or loot such as ores/ ore blocks which can however be stolen from any chest public or secret. To be considered a building as opposed to a base for grinding, has to contain no villagers yet can contain stashes, but that can be stolen from.(Exeunt minor griefing such as people trying to jump/ pvp you and they place a cobweb or mine blocks to get to you)</p>
       </div>
       <div class="rule-block">
-        <h2>COMMANDMENT III</h2>
-        <p>Rule 3: Major greifing and stealing is NOT allowed and any intentional breaking of farms or killing of villagers not owned by you are not allowed</p>
+        <h2>RULE 3</h2>
+        <p>Mob/loot drop farms are only griefable if they are private and aren't allowing everyone to know about it, if you post a picture/ message indicating its location in the discord channel for it then it is ungriefable.(Exeunt minor griefing such as people trying to jump/ pvp you and they place a cobweb or mine blocks to get to you)</p>
       </div>
       <div class="rule-block">
-        <h2>COMMANDMENT IV</h2>
-        <p>Rule 4: Users are not allowed to avoid or bypass punishments. Any circumvention with alt accounts may result in a ban on all accounts. Any use of the server-chat while muted or banned is also not permitted.</p>
+        <h2>RULE 4</h2>
+        <p>Exploiting or cooperating/ purposefully benefitting from it whether thats an ingame glitch, mod or bug. You must immediately report it to an owner and stop others from doing it until its fixed.
+Any forms of purposefully lagging out the server or issues that lag out the server must be reported or can be punishable. If you unintentionally lag out the server you may immediately get rid of it to avoid punishment or a longer dealing of it</p>
       </div>
       <div class="rule-block">
-        <h2>COMMANDMENT V</h2>
-        <p>Rule 5: Players who are involved in the breaking of rules may be punished depending on the rule broken, previous history and the severity of the issue. This includes assisting, participating or benefiting from others breaking the rules. It could be treated as if they committed the act.
-
-        All users are expected to contact support immediately if they have discovered an exploit, glitch, or bug. Any gain, even accidental, must be reported immediately. Players who take advantage of any bugs, glitches, or exploit will be punished depending on severity.</p>
+        <h2>RULE 5</h2>
+        <p>Any forms of purposefully lagging out the server or issues that lag out the server must be reported or can be punishable. If you unintentionally lag out the server you may immediately get rid of it to avoid punishment or a longer dealing of it</p>
       </div>
       <div class="rule-block">
-        <h2>COMMANDMENT VI</h2>
-        <p>Rule 6: Any form of disrupting server activity (e.g. intentionally lagging the server, intervening in staff operations such as responding to tickets or player concerns, performing denial of service attacks [DOS] or distributed denial of service attacks [DDOS], making unnecessary tickets in our support discord, or spamming tickets) is not allowed and players will be punished depending on severity. Any severe form of server disruption (DDOS attacks) will be reported to the proper authorities.
-
-        Mass spawning of entities (ex. Boats, minecarts, dropped items) is not allowed and will result in the automatic despawning of said entities.</p>
+        <h2>RULE 6</h2>
+        <p>There is a team limit where the max points are 18 and 5 individuals per team max (a team must fit both the requirements) the official tierlist is available here: <a href="https://tiermaker.com/list/minecraft/simghst-smp-19462589/6283338" target="_blank" class="url-link">https://tiermaker.com/list/minecraft/simghst-smp-19462589/6283338</a> there will likely be changes due to new players, player improvement or misconceptions of skill. If you move up in the tierlist and your point total exceeds the max then you are allowed to stay in your team up to a 2 point exceeding limit (note only in case you have a pre-existing team not pre-planned team so after the teams creation) an example of this is if a 7, a 6 and a 5 point player was on a team and the 5 moved up to 7 that would be allowed to remain a team but on the creation of a second team regarding that player they will be unable to team to that total.</p>
       </div>
       <div class="rule-block">
-        <h2>COMMANDMENT VII</h2>
-        <p>Rule 7: Sharing personal information of other players is not allowed (Doxxing). Examples of personal information are (but not limited to) full names, photos / videos of players' real-life identities, phone numbers, social network profiles, contact details and locations of players' home/school/work.
-
-        The use of (or threat to use) players' personal information is strictly prohibited under all circumstances, for any purpose, regardless of intent or justification.</p>
-      </div>
-      <div class="rule-block">
-        <h2>COMMANDMENT VIII</h2>
-        <p>Rule 8: Any form of impersonation is not allowed. This includes, but is not limited to, changing your username, nickname or town and nation names to closely resemble or imitate another player or entity. It may also apply to skins in some instances. Impersonation of staff in any form is not allowed.
-
-        Players who intentionally impersonate others in a way that cause harm or disruption may be subject to harsher punishments such as permanent bans.
-
-        Comments or discussions that harm a player's real-life identity or reputation, such as spreading false or misleading information (defamation) are not allowed.
-
-        This includes, but is not limited to, making allegations of pedophilia in public chat. Any legitimate concerns should be reported through a ticket with supporting evidence. False or unfounded accusations will result in punishment.
-
-        This rule also covers any attempt to mislead players, undermine trust, or damage the reputation of DMC or its staff. Prohibited behavior includes, but is not limited to:
-        • Fabricating, altering, or falsifying evidence
-        • Intentionally submitting false or misleading tickets
-        • Faking statements or screenshots
-        • Intentionally spreading false rumors about the server, its staff, or its community</p>
-      </div>
-      <div class="rule-block">
-        <h2>COMMANDMENT IX</h2>
-        <p>Rule 9: All named items and entities in-game, usernames, titles, nicknames, and discord accounts must be compliant with rule 10. This also includes plot names, town cultures, etc. Generally, they must be presented in English characters (no accents, symbols, etc.).
-
-        Staff may rename or remove them, in addition to applying punishments.</p>
-      </div>
-      <div class="rule-block">
-        <h2>COMMANDMENT X</h2>
-        <p>Rule 10: Spamming, which is the act of repeatedly and swiftly sending messages in chat, is not allowed. This includes messages with all caps, spam of text, phrases, duplicates of text, copypastas, emojis, videos, images, links, GIFs, and pings. Mass pinging is not allowed.
-
-        It is expected that all players remain respectful. Examples of toxicity include, but are not limited to:
-        • Harassment or bullying of other players or staff members, including but not limited to targeted insults, attempting to bypass blocks (/ignore), repeated provocation or unprovoked killings, and excessive town camping
-        • Repeat demands to staff, intentionally testing server boundaries to provoke a reaction.
-        • Inciting violence or toxicity
-        • Messages that involve considerable amounts of profanity
-
-        Punishments may vary depending on severity and/or previous history. Unwanted behavior includes:
-        • Bypassing chat filter
-        • Discriminatory language or hate speech towards racial and social identities
-        • Encouraging self-harm or violence towards players
-        • Nazism
-        • Sensitive or explicit topics (sexual content)
-        • Any inappropriate interactions towards other players
-
-        To maintain a respectful environment, we ask that roleplay/larping involving Israel, Palestine, Gaza, Turkey, Iran, Ukraine, and Russia be limited due to ongoing conflicts.</p>
+        <h2>RULE 7</h2>
+        <p>Comat logging is prohibited and is controlled by the mod, more unallowed pvp includes: crystals, respawn anchors and elytras. In addition to all the previous, there are cooldowns for certain items such as pearls and maces. There are also limits to items like netherite armour and that is only obtainable through specific events yet netherite tools are fully allowed aswell as all enchants but the curses (binding and vanishing).</p>
       </div>
     </div>
   </section>
 
+  <!-- VOICE CHAT SELECTION -->
+  <section id="vc-view" class="page-view">
+    <div class="back-link" onclick="showView('home-view')">← Back</div>
+    <div class="hero"><h1>Proximity Voice Chat</h1></div>
+    <p style="text-align: center; margin-bottom: 30px;">Choose your preferred profile method to establish a audio stream connection.</p>
+    <div class="grid">
+      <div class="card mod-style" onclick="showView('vc-mod-tutorial')"><h3>Install the Mod</h3><p>Java Native Integration</p></div>
+      <div class="card discord-style" onclick="showView('vc-discord-tutorial')"><h3>Join via Discord</h3><p>Bedrock Link Interface</p></div>
+    </div>
+  </section>
+
+  <!-- VC MOD TUTORIAL -->
+  <section id="vc-mod-tutorial" class="page-view">
+    <div class="back-link" onclick="showView('vc-view')">← Back</div>
+    <div class="tutorial-content">
+      <h1>Simple Voice Chat Setup</h1>
+      <div class="btn-group">
+        <a href="https://modrinth.com/mod/simple-voice-chat" target="_blank" class="link-action-btn">DOWNLOAD MOD</a>
+        <button class="text-guide-btn" onclick="toggleText('tg-vcm')">SHOW STEPS</button>
+      </div>
+      <div id="tg-vcm" class="text-guide-box open">
+        <ol>
+          <li>Ensure your client environment profile uses either Fabric, Forge, or NeoForge ecosystem loaders.</li>
+          <li>Download the <strong>Simple Voice Chat Mod</strong> match build version matching our active server core layer.</li>
+          <li>Drop the retrieved <code>.jar</code> file element container straight into your local directory <code>.minecraft/mods</code> folder directory path.</li>
+          <li>Launch the client loader instance, connect natively to the instance port, and open settings panel configurations in-game using the keybind: <span class="highlight-ip">V</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- VC DISCORD TUTORIAL -->
+  <section id="vc-discord-tutorial" class="page-view">
+    <div class="back-link" onclick="showView('vc-view')">← Back</div>
+    <div class="tutorial-content">
+      <h1>Discord Audio Bridge Link</h1>
+      <div class="btn-group">
+        <a href="https://discord.gg/UBgK2vvcmH" target="_blank" class="discord-btn" style="width: auto; height: auto; padding: 16px 24px; font-family: var(--pixel); font-size: 10px; color: white;">JOIN DISCORD</a>
+        <button class="text-guide-btn" onclick="toggleText('tg-vcd')">SHOW STEPS</button>
+      </div>
+      <div id="tg-vcd" class="text-guide-box open">
+        <ol>
+          <li>Enter our official community workspace server portal via the active invite route link structure.</li>
+          <li>Locate, navigate to, and connect your discord account directly into one of our channel cells named: <span class="highlight-ip">JOIN VC</span></li>
+          <li>Launch your active Minecraft client session, complete network entry handshake validation, then open terminal log inputs.</li>
+          <li>Execute the synchronization terminal key string command exactly as shown: <span class="highlight-ip">/dvc start</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM SELECTION -->
   <section id="platform-view" class="page-view">
     <div class="back-link" onclick="showView('home-view')">← Back</div>
     <div class="hero"><h1>Pick Your Platform</h1></div>
@@ -216,6 +256,7 @@
     </div>
   </section>
 
+  <!-- PC TUTORIAL -->
   <section id="pc-tutorial" class="page-view">
     <div class="back-link" onclick="showView('platform-view')">← Back</div>
     <div class="tutorial-content">
@@ -235,6 +276,7 @@
     </div>
   </section>
 
+  <!-- SWITCH TUTORIAL -->
   <section id="switch-tutorial" class="page-view">
     <div class="back-link" onclick="showView('platform-view')">← Back</div>
     <div class="tutorial-content">
@@ -254,6 +296,7 @@
     </div>
   </section>
 
+  <!-- PLAYSTATION TUTORIAL -->
   <section id="ps-tutorial" class="page-view">
     <div class="back-link" onclick="showView('platform-view')">← Back</div>
     <div class="tutorial-content">
@@ -273,6 +316,7 @@
     </div>
   </section>
 
+  <!-- XBOX TUTORIAL -->
   <section id="xbox-tutorial" class="page-view">
     <div class="back-link" onclick="showView('platform-view')">← Back</div>
     <div class="tutorial-content">
@@ -296,12 +340,18 @@
 <script>
   function showView(id) {
     document.querySelectorAll('.page-view').forEach(v => v.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+    const target = document.getElementById(id);
+    if(target) {
+      target.classList.add('active');
+    }
     window.scrollTo(0,0);
   }
 
   function toggleText(id) {
-    document.getElementById(id).classList.toggle('open');
+    const el = document.getElementById(id);
+    if(el) {
+      el.classList.toggle('open');
+    }
   }
 
   function copyIP() {
