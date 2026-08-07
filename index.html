@@ -31,21 +31,15 @@
   .discord-btn svg { width: 30px; fill: white; }
 
   main { position: relative; z-index: 2; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 80px 20px 120px; }
+  .page-view { display: none; width: 100%; max-width: 900px; flex-direction: column; align-items: center; }
+  .page-view.active { display: flex; }
 
-  /* Section Views Control */
-  .site-view { display: none; width: 100%; max-width: 900px; flex-direction: column; align-items: center; }
-  .site-view.active { display: flex; }
-
-  .back-link { align-self: flex-start; font-family: var(--pixel); font-size: 10px; color: var(--grass); text-decoration: none; margin-bottom: 30px; cursor: pointer; }
-  
-  /* Home View Styles */
+  /* HOME */
   .hero { text-align: center; margin-bottom: 40px; }
   .logo-title { font-family: var(--pixel); font-size: clamp(26px, 6vw, 52px); color: var(--cream); text-shadow: 4px 4px 0 var(--grass); margin-bottom: 18px; }
-  .day-display { font-family: var(--mono); font-size: 22px; color: var(--gold); margin-top: 10px; }
-
+  .day-display { font-family: var(--mono); font-size: 20px; color: var(--gold); margin-top: 10px; }
   .ip-card { background: var(--panel); border: 2px solid var(--grass); border-radius: 4px; padding: 28px 40px; text-align: center; margin-bottom: 40px; width: 100%; max-width: 520px; }
   .ip-address { font-family: var(--pixel); font-size: 18px; color: var(--gold); margin-bottom: 25px; display: block; }
-
   .copy-btn { background: var(--grass); font-family: var(--pixel); color: white; border: none; padding: 16px 30px; font-size: 12px; cursor: pointer; transition: 0.1s; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); }
   .copy-btn span { margin-right: 8px; color: rgba(255,255,255,0.5); }
 
@@ -55,14 +49,28 @@
   .disabled-btn { background: #5a1212; font-family: var(--pixel); color: #ff6b6b; border: 2px solid #ff4444; padding: 20px; font-size: 12px; text-decoration: none; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); text-align: center; display: block; }
   .events-btn { background: #4a354f; font-family: var(--pixel); color: #dfb2f4; border: 2px solid #8e55a4; padding: 20px; font-size: 12px; text-decoration: none; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); text-align: center; display: block; }
 
-  /* Join View Styles */
-  .sub-view { display: none; width: 100%; flex-direction: column; align-items: center; }
-  .sub-view.active { display: flex; }
-  
+  /* RULES */
+  .rule-warning { font-family: var(--pixel); color: #ff4444; font-size: 11px; text-align: center; margin-bottom: 30px; line-height: 1.5; }
+  .rules-container { width: 100%; text-align: left; }
+  .rule-block { background: rgba(255,255,255,0.03); border-left: 4px solid var(--gold); padding: 25px; margin-bottom: 20px; border-radius: 0 4px 4px 0; }
+  .rule-block h2 { font-family: var(--pixel); font-size: 12px; color: var(--gold); margin-bottom: 15px; }
+  .rule-block p { font-size: 16px; line-height: 1.7; color: var(--cream); white-space: pre-wrap; }
+  .url-link { color: var(--sky); text-decoration: underline; word-break: break-all; }
+
+  /* EVENTS */
+  .events-list { background: var(--panel); border: 2px solid #8e55a4; padding: 40px; border-radius: 4px; width: 100%; }
+  .event-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px 0; }
+  .event-item:last-child { border-bottom: none; }
+  .event-title { font-family: var(--pixel); color: #dfb2f4; font-size: 16px; margin-bottom: 10px; text-transform: uppercase; }
+  .event-time { font-family: var(--mono); color: var(--gold); font-size: 24px; }
+  .no-events { font-family: var(--pixel); color: var(--cream); text-align: center; font-size: 14px; padding: 20px 0; }
+
+  .back-link { align-self: flex-start; font-family: var(--pixel); font-size: 10px; color: var(--grass); text-decoration: none; margin-bottom: 30px; cursor: pointer; }
+
+  /* PLATFORM GRID / TUTORIALS */
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; width: 100%; margin-top: 20px; }
   .card { background: rgba(255,255,255,0.04); border: 2px solid var(--border); padding: 30px; border-radius: 4px; text-align: center; cursor: pointer; transition: 0.2s; }
   .card:hover { transform: translateY(-5px); border-color: var(--pc); background: rgba(255,255,255,0.08); }
-
   .tutorial-content { text-align: center; width: 100%; }
   .btn-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px; margin-bottom: 10px; }
   .video-link-btn { background: #ff0000; font-family: var(--pixel); color: white; border: none; padding: 16px 24px; font-size: 10px; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.3); text-decoration: none; }
@@ -74,18 +82,6 @@
   .highlight-ip { color: var(--gold); font-family: var(--pixel); font-size: 12px; display: block; margin: 5px 0; }
 
   .pc { --pc: #5bc8f5; } .switch { --pc: #e4000f; } .ps { --pc: #003087; } .xbox { --pc: #107c10; }
-
-  /* Rules View Styles */
-  .coming-soon-box { background: var(--panel); border: 2px solid var(--gold); border-radius: 4px; padding: 60px 40px; text-align: center; margin-top: 20px; width: 100%; }
-  .coming-soon-box p { font-family: var(--pixel); color: var(--gold); font-size: 14px; }
-
-  /* Events View Styles */
-  .events-list { background: var(--panel); border: 2px solid #8e55a4; padding: 40px; border-radius: 4px; width: 100%; max-width: 900px; }
-  .event-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px 0; }
-  .event-item:last-child { border-bottom: none; }
-  .event-title { font-family: var(--pixel); color: #dfb2f4; font-size: 16px; margin-bottom: 10px; text-transform: uppercase; }
-  .event-time { font-family: var(--mono); color: var(--gold); font-size: 24px; }
-  .no-events { font-family: var(--pixel); color: var(--cream); text-align: center; font-size: 14px; padding: 20px 0; }
 </style>
 </head>
 <body>
@@ -100,144 +96,197 @@
 <div class="ground-strip"><div class="grass-row"></div><div class="dirt-row"></div></div>
 
 <main>
-  <!-- HOME SECTION -->
-  <section id="home-view" class="site-view active">
+  <!-- HOME -->
+  <section id="home-view" class="page-view">
     <div class="hero">
       <h1 class="logo-title">MEINCRAFT</h1>
       <p>The ultimate semi-vanilla experience.</p>
-      <div class="day-display day-display-target"></div>
+      <div class="day-display" id="dayDisplay"></div>
     </div>
     <div class="ip-card">
       <span class="ip-address">play.meincraft.xyz</span>
       <button class="copy-btn" id="copyBtn" onclick="copyIP()"><span>&#9632;</span> Copy IP</button>
     </div>
     <div class="home-nav">
-      <a href="#join" class="action-btn">How to Join Server</a>
-      <a href="#rules" class="rules-btn">Rules</a>
-      <a href="#schedule" class="events-btn">Server Events</a>
+      <a class="action-btn" href="/join" onclick="return nav(event,'/join','join-view')">How to Join Server</a>
+      <a class="rules-btn" href="/rules" onclick="return nav(event,'/rules','rules-view')">Rules</a>
+      <a class="events-btn" href="/schedule" onclick="return nav(event,'/schedule','schedule-view')">Server Events</a>
       <a class="disabled-btn" href="https://discord.gg/7rpjkszsAa" target="_blank">More Info</a>
     </div>
   </section>
 
-  <!-- HOW TO JOIN SECTION -->
-  <section id="join-view" class="site-view">
-    <!-- PLATFORM SELECTION -->
-    <div id="platform-view" class="sub-view active">
-      <a href="#" class="back-link">← Back</a>
-      <div class="hero"><h1 style="font-family: var(--pixel); font-size: clamp(20px, 5vw, 34px);">Pick Your Platform</h1></div>
-      <div class="grid">
-        <div class="card pc" onclick="showSubView('pc-tutorial')"><h3>PC / Java</h3><p>Java Edition</p></div>
-        <div class="card switch" onclick="showSubView('switch-tutorial')"><h3>Switch</h3><p>Bedrock Edition</p></div>
-        <div class="card ps" onclick="showSubView('ps-tutorial')"><h3>PlayStation</h3><p>Bedrock Edition</p></div>
-        <div class="card xbox" onclick="showSubView('xbox-tutorial')"><h3>Xbox</h3><p>Bedrock Edition</p></div>
-      </div>
-    </div>
+  <!-- RULES -->
+  <section id="rules-view" class="page-view">
+    <a class="back-link" href="/" onclick="return nav(event,'/','home-view')">← Back</a>
+    <div class="rule-warning">THESE RULES ARE SUBJECT TO CHANGE AT ANY TIME</div>
+    <div class="hero"><h1>Server Rules</h1></div>
 
-    <!-- PC TUTORIAL -->
-    <div id="pc-tutorial" class="sub-view">
-      <div class="back-link" onclick="showSubView('platform-view')">← Back</div>
-      <div class="tutorial-content">
-        <h1 style="font-family: var(--pixel); font-size: clamp(20px, 5vw, 34px);">PC Connection</h1>
-        <div class="btn-group">
-          <a href="https://www.youtube.com/watch?v=XVT6gx8Bl6Y&t=46s" target="_blank" class="video-link-btn">VIDEO TUTORIAL</a>
-          <button class="text-guide-btn" onclick="toggleText('tg-pc')">TEXT INSTRUCTIONS</button>
-        </div>
-        <div id="tg-pc" class="text-guide-box">
-          <ol>
-            <li>Launch Minecraft: Java Edition.</li>
-            <li>Click Multiplayer > Add Server.</li>
-            <li>In the Server Address box, put the server IP: <span class="highlight-ip">play.meincraft.xyz</span></li>
-            <li>Click Done and join!</li>
-          </ol>
-        </div>
+    <div class="rules-container">
+      <div class="rule-block">
+        <h2>RULE 1</h2>
+        <p>No hacks or mods that give players a large advantage over others, examples that are not allowed include xaero's minimap and worldmap, x-ray of any kind, freecam, inventory movement and more, (If you are unsure ask before you get banned)</p>
       </div>
-    </div>
-
-    <!-- SWITCH TUTORIAL -->
-    <div id="switch-tutorial" class="sub-view">
-      <div class="back-link" onclick="showSubView('platform-view')">← Back</div>
-      <div class="tutorial-content">
-        <h1 style="font-family: var(--pixel); font-size: clamp(20px, 5vw, 34px);">Switch Connection</h1>
-        <div class="btn-group">
-          <a href="https://www.youtube.com/watch?v=zalT_oR1nPM" target="_blank" class="video-link-btn">VIDEO TUTORIAL</a>
-          <button class="text-guide-btn" onclick="toggleText('tg-sw')">TEXT INSTRUCTIONS</button>
-        </div>
-        <div id="tg-sw" class="text-guide-box">
-          <ol>
-            <li>Settings > Internet > Internet Settings.</li>
-            <li>Manual DNS: Primary <code>104.238.130.180</code> | Secondary <code>8.8.8.8</code>.</li>
-            <li>Launch Minecraft > Servers > Join any featured server.</li>
-            <li>Select 'Connect to a Server' and enter the IP: <span class="highlight-ip">play.meincraft.xyz</span></li>
-          </ol>
-        </div>
+      <div class="rule-block">
+        <h2>RULE 2</h2>
+        <p>If there is a house with the purpose just for building, that cannot be griefed and if there are chests that only include building materials cannot be stolen. Pvp gear or loot such as ores/ ore blocks which can however be stolen from any chest public or secret. To be considered a building as opposed to a base for grinding, has to contain no villagers yet can contain stashes, but that can be stolen from.(Exeunt minor griefing such as people trying to jump/ pvp you and they place a cobweb or mine blocks to get to you)</p>
       </div>
-    </div>
-
-    <!-- PLAYSTATION TUTORIAL -->
-    <div id="ps-tutorial" class="sub-view">
-      <div class="back-link" onclick="showSubView('platform-view')">← Back</div>
-      <div class="tutorial-content">
-        <h1 style="font-family: var(--pixel); font-size: clamp(20px, 5vw, 34px);">PlayStation Connection</h1>
-        <div class="btn-group">
-          <a href="https://www.youtube.com/watch?v=YyMY6fqzUNs&t=5s" target="_blank" class="video-link-btn">VIDEO TUTORIAL</a>
-          <button class="text-guide-btn" onclick="toggleText('tg-ps')">TEXT INSTRUCTIONS</button>
-        </div>
-        <div id="tg-ps" class="text-guide-box">
-          <ol>
-            <li>Network Settings > Custom DNS.</li>
-            <li>Primary DNS: <code>104.238.130.180</code> | Secondary: <code>8.8.8.8</code>.</li>
-            <li>Launch Minecraft > Servers > Join any featured server.</li>
-            <li>In the menu, click 'Connect to a Server' and enter the IP: <span class="highlight-ip">play.meincraft.xyz</span></li>
-          </ol>
-        </div>
+      <div class="rule-block">
+        <h2>RULE 3</h2>
+        <p>Mob/loot drop farms are only griefable if they are private and aren't allowing everyone to know about it, if you post a picture/ message indicating its location in the discord channel for it then it is ungriefable.(Exeunt minor griefing such as people trying to jump/ pvp you and they place a cobweb or mine blocks to get to you)</p>
       </div>
-    </div>
-
-    <!-- XBOX TUTORIAL -->
-    <div id="xbox-tutorial" class="sub-view">
-      <div class="back-link" onclick="showSubView('platform-view')">← Back</div>
-      <div class="tutorial-content">
-        <h1 style="font-family: var(--pixel); font-size: clamp(20px, 5vw, 34px);">Xbox Connection</h1>
-        <div class="btn-group">
-          <a href="https://www.youtube.com/watch?v=0vIhBWaBDig&t=27s" target="_blank" class="video-link-btn">VIDEO TUTORIAL</a>
-          <button class="text-guide-btn" onclick="toggleText('tg-xb')">TEXT INSTRUCTIONS</button>
-        </div>
-        <div id="tg-xb" class="text-guide-box">
-          <ol>
-            <li>Network Settings > Advanced > DNS > Manual.</li>
-            <li>Primary DNS: <code>104.238.130.180</code> | Secondary: <code>8.8.8.8</code>.</li>
-            <li>Launch Minecraft > Servers > Join any featured server.</li>
-            <li>Choose 'Connect to a Server' and enter the server IP: <span class="highlight-ip">play.meincraft.xyz</span></li>
-          </ol>
-        </div>
+      <div class="rule-block">
+        <h2>RULE 4</h2>
+        <p>Exploiting or cooperating/ purposefully benefitting from it whether thats an ingame glitch, mod or bug. You must immediately report it to an owner and stop others from doing it until its fixed.
+Any forms of purposefully lagging out the server or issues that lag out the server must be reported or can be punishable. If you unintentionally lag out the server you may immediately get rid of it to avoid punishment or a longer dealing of it</p>
+      </div>
+      <div class="rule-block">
+        <h2>RULE 5</h2>
+        <p>Any forms of purposefully lagging out the server or issues that lag out the server must be reported or can be punishable. If you unintentionally lag out the server you may immediately get rid of it to avoid punishment or a longer dealing of it</p>
+      </div>
+      <div class="rule-block">
+        <h2>RULE 6</h2>
+        <p>There is a team limit where the max points are 18 and 5 individuals per team max (a team must fit both the requirements) the official tierlist is available here: <a href="https://tiermaker.com/list/minecraft/simghst-smp-19462589/6283338" target="_blank" class="url-link">https://tiermaker.com/list/minecraft/simghst-smp-19462589/6283338</a> there will likely be changes due to new players, player improvement or misconceptions of skill. If you move up in the tierlist and your point total exceeds the max then you are allowed to stay in your team up to a 2 point exceeding limit (note only in case you have a pre-existing team not pre-planned team so after the teams creation) an example of this is if a 7, a 6 and a 5 point player was on a team and the 5 moved up to 7 that would be allowed to remain a team but on the creation of a second team regarding that player they will be unable to team to that total.</p>
+      </div>
+      <div class="rule-block">
+        <h2>RULE 7</h2>
+        <p>Comat logging is prohibited and is controlled by the mod, more unallowed pvp includes: crystals, respawn anchors and elytras. In addition to all the previous, there are cooldowns for certain items such as pearls and maces. There are also limits to items like netherite armour and that is only obtainable through specific events yet netherite tools are fully allowed aswell as all enchants but the curses (binding and vanishing).</p>
       </div>
     </div>
   </section>
 
-  <!-- RULES SECTION -->
-  <section id="rules-view" class="site-view">
-    <a href="#" class="back-link">← Back</a>
+  <!-- SCHEDULE -->
+  <section id="schedule-view" class="page-view">
+    <a class="back-link" href="/" onclick="return nav(event,'/','home-view')">← Back</a>
     <div class="hero">
-      <h1 style="font-family: var(--pixel); font-size: clamp(20px, 5vw, 34px);">Server Rules</h1>
-      <div class="coming-soon-box">
-        <p>COMING SOON</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- EVENTS SECTION -->
-  <section id="events-view" class="site-view">
-    <a href="#" class="back-link">← Back</a>
-    <div class="hero">
-      <h1 style="font-family: var(--pixel); font-size: clamp(20px, 5vw, 34px);">Upcoming Events</h1>
-      <div class="day-display day-display-target"></div>
+      <h1>Upcoming Events</h1>
+      <div class="day-display" id="dayDisplaySchedule"></div>
     </div>
     <div class="events-list" id="eventsList"></div>
+  </section>
+
+  <!-- JOIN: PLATFORM SELECTION -->
+  <section id="join-view" class="page-view">
+    <a class="back-link" href="/" onclick="return nav(event,'/','home-view')">← Back</a>
+    <div class="hero"><h1>Pick Your Platform</h1></div>
+    <div class="grid">
+      <div class="card pc" onclick="showView('pc-tutorial')"><h3>PC / Java</h3><p>Java Edition</p></div>
+      <div class="card switch" onclick="showView('switch-tutorial')"><h3>Switch</h3><p>Bedrock Edition</p></div>
+      <div class="card ps" onclick="showView('ps-tutorial')"><h3>PlayStation</h3><p>Bedrock Edition</p></div>
+      <div class="card xbox" onclick="showView('xbox-tutorial')"><h3>Xbox</h3><p>Bedrock Edition</p></div>
+    </div>
+  </section>
+
+  <!-- PC TUTORIAL -->
+  <section id="pc-tutorial" class="page-view">
+    <div class="back-link" onclick="showView('join-view')">← Back</div>
+    <div class="tutorial-content">
+      <h1>PC Connection</h1>
+      <div class="btn-group">
+        <a href="https://www.youtube.com/watch?v=XVT6gx8Bl6Y&t=46s" target="_blank" class="video-link-btn">VIDEO TUTORIAL</a>
+        <button class="text-guide-btn" onclick="toggleText('tg-pc')">TEXT INSTRUCTIONS</button>
+      </div>
+      <div id="tg-pc" class="text-guide-box">
+        <ol>
+          <li>Launch Minecraft: Java Edition.</li>
+          <li>Click Multiplayer > Add Server.</li>
+          <li>In the Server Address box, put the server IP: <span class="highlight-ip">play.meincraft.xyz</span></li>
+          <li>Click Done and join!</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- SWITCH TUTORIAL -->
+  <section id="switch-tutorial" class="page-view">
+    <div class="back-link" onclick="showView('join-view')">← Back</div>
+    <div class="tutorial-content">
+      <h1>Switch Connection</h1>
+      <div class="btn-group">
+        <a href="https://www.youtube.com/watch?v=zalT_oR1nPM" target="_blank" class="video-link-btn">VIDEO TUTORIAL</a>
+        <button class="text-guide-btn" onclick="toggleText('tg-sw')">TEXT INSTRUCTIONS</button>
+      </div>
+      <div id="tg-sw" class="text-guide-box">
+        <ol>
+          <li>Settings > Internet > Internet Settings.</li>
+          <li>Manual DNS: Primary <code>104.238.130.180</code> | Secondary <code>8.8.8.8</code>.</li>
+          <li>Launch Minecraft > Servers > Join any featured server.</li>
+          <li>Select 'Connect to a Server' and enter the IP: <span class="highlight-ip">play.meincraft.xyz</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLAYSTATION TUTORIAL -->
+  <section id="ps-tutorial" class="page-view">
+    <div class="back-link" onclick="showView('join-view')">← Back</div>
+    <div class="tutorial-content">
+      <h1>PlayStation Connection</h1>
+      <div class="btn-group">
+        <a href="https://www.youtube.com/watch?v=YyMY6fqzUNs&t=5s" target="_blank" class="video-link-btn">VIDEO TUTORIAL</a>
+        <button class="text-guide-btn" onclick="toggleText('tg-ps')">TEXT INSTRUCTIONS</button>
+      </div>
+      <div id="tg-ps" class="text-guide-box">
+        <ol>
+          <li>Network Settings > Custom DNS.</li>
+          <li>Primary DNS: <code>104.238.130.180</code> | Secondary: <code>8.8.8.8</code>.</li>
+          <li>Launch Minecraft > Servers > Join any featured server.</li>
+          <li>In the menu, click 'Connect to a Server' and enter the IP: <span class="highlight-ip">play.meincraft.xyz</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- XBOX TUTORIAL -->
+  <section id="xbox-tutorial" class="page-view">
+    <div class="back-link" onclick="showView('join-view')">← Back</div>
+    <div class="tutorial-content">
+      <h1>Xbox Connection</h1>
+      <div class="btn-group">
+        <a href="https://www.youtube.com/watch?v=0vIhBWaBDig&t=27s" target="_blank" class="video-link-btn">VIDEO TUTORIAL</a>
+        <button class="text-guide-btn" onclick="toggleText('tg-xb')">TEXT INSTRUCTIONS</button>
+      </div>
+      <div id="tg-xb" class="text-guide-box">
+        <ol>
+          <li>Network Settings > Advanced > DNS > Manual.</li>
+          <li>Primary DNS: <code>104.238.130.180</code> | Secondary: <code>8.8.8.8</code>.</li>
+          <li>Launch Minecraft > Servers > Join any featured server.</li>
+          <li>Choose 'Connect to a Server' and enter the server IP: <span class="highlight-ip">play.meincraft.xyz</span></li>
+        </ol>
+      </div>
+    </div>
   </section>
 </main>
 
 <script>
-  // Copy IP Functionality
+  // ---- routing ----
+  const routes = { '/': 'home-view', '/rules': 'rules-view', '/schedule': 'schedule-view', '/join': 'join-view' };
+
+  function showView(id) {
+    document.querySelectorAll('.page-view').forEach(v => v.classList.remove('active'));
+    const target = document.getElementById(id);
+    if (target) target.classList.add('active');
+    window.scrollTo(0,0);
+  }
+
+  function nav(evt, path, viewId) {
+    evt.preventDefault();
+    history.pushState({}, '', path);
+    showView(viewId);
+    return false;
+  }
+
+  window.addEventListener('popstate', () => {
+    showView(routes[window.location.pathname] || 'home-view');
+  });
+
+  // Show the correct view for whatever path the page loaded on
+  showView(routes[window.location.pathname] || 'home-view');
+
+  function toggleText(id) {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('open');
+  }
+
   function copyIP() {
     const btn = document.getElementById('copyBtn');
     navigator.clipboard.writeText('play.meincraft.xyz').then(() => {
@@ -246,54 +295,7 @@
     });
   }
 
-  // Hash-based Routing Logic
-  const hashToViewMap = {
-    '': 'home-view',
-    '#': 'home-view',
-    '#join': 'join-view',
-    '#rules': 'rules-view',
-    '#schedule': 'events-view'
-  };
-
-  function handleRoute() {
-    const hash = window.location.hash;
-    const viewId = hashToViewMap[hash] || 'home-view';
-
-    document.querySelectorAll('.site-view').forEach(v => v.classList.remove('active'));
-    const target = document.getElementById(viewId);
-    if (target) { target.classList.add('active'); }
-
-    if (viewId === 'join-view') {
-      showSubView('platform-view');
-    }
-
-    window.scrollTo(0, 0);
-  }
-
-  // Listen for hash changes and page load
-  window.addEventListener('hashchange', handleRoute);
-  window.addEventListener('DOMContentLoaded', handleRoute);
-
-  function showSubView(id) {
-    document.querySelectorAll('.sub-view').forEach(v => v.classList.remove('active'));
-    const target = document.getElementById(id);
-    if(target) { target.classList.add('active'); }
-    window.scrollTo(0,0);
-  }
-
-  function toggleText(id) {
-    const el = document.getElementById(id);
-    if(el) { el.classList.toggle('open'); }
-  }
-
-  // Set Day Displays
-  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const now = new Date();
-  document.querySelectorAll('.day-display-target').forEach(el => {
-    el.textContent = 'Today is ' + days[now.getDay()];
-  });
-
-  // Dynamic Events List
+  // ---- events ----
   const events = [
     { title: 'Server Opening',      date: new Date(2026, 7, 8,  15, 0), label: 'Saturday 8th August @ 3:00 PM' },
     { title: 'Taskmaster',          date: new Date(2026, 7, 10, 17, 0), label: 'Monday 10th August @ 5:00 PM' },
@@ -305,9 +307,9 @@
     { title: 'End Event',           date: new Date(2026, 7, 21, 17, 0), label: 'Friday 21st August @ 5:00 PM' },
   ];
 
+  const now = new Date();
   const upcoming = events.filter(e => e.date > now);
   const list = document.getElementById('eventsList');
-  
   if (upcoming.length === 0) {
     list.innerHTML = '<div class="no-events">No upcoming events right now — check back soon!</div>';
   } else {
@@ -319,9 +321,14 @@
     });
   }
 
-  // Star Field Effect
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const todayText = 'Today is ' + days[now.getDay()];
+  document.getElementById('dayDisplay').textContent = todayText;
+  document.getElementById('dayDisplaySchedule').textContent = todayText;
+
+  // ---- starfield ----
   const starContainer = document.getElementById('stars');
-  for(let i=0; i<120; i++) {
+  for (let i = 0; i < 120; i++) {
     const s = document.createElement('div');
     s.className = 'star';
     const sz = Math.random()*2 + 1;
